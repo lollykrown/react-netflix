@@ -21,22 +21,23 @@ export default class Movie extends Component {
   const prefix = this.props.prefix
   
     return (
+      <div className="card col-md-4 col-lg-2" >
+          <Link to="/movies'/m.id">
+          <figure className="figure">
+            <img src={`${prefix}${poster_path}`} className="card-img img-fluid" alt="poster" width="200" height="250"/>
+            
+            <div className="card-body">
+          <figcaption className="figure-caption" title={title}>{title}</figcaption>
+          <p className="r-date"><strong>{release_date}</strong></p>
 
-          <div className="row vid">
-                  <div className="card" >
-                      <Link to="/movies'/m.id">
-                      <figure className="figure">
-                        <img src={`${prefix}${poster_path}`} className="figure-img img-fluid rounded" alt="poster" width="200" height="300"/>
-                        <figcaption className="figure-caption" title={title}>{title}</figcaption>
-                      </figure>
-                    </Link>
-                      <div>
-                      <p className="r-date"><strong>{release_date}</strong></p>
-                      <span className="fa fa-heart-o"></span>
-                      <span className="fa fa-heart" ></span>
-                    </div>
-                  </div>
           </div>
+          </figure>
+        </Link >
+          <div className="">
+          <span className="fa fa-heart-o"></span>
+          <span className="fa fa-heart" ></span>
+        </div>
+      </div>
     );
   }
 }

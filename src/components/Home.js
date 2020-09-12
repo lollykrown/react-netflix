@@ -71,7 +71,7 @@ export default class Home extends Component {
       <section className="container-fluid my-3 custom-padd">
         <div className="container-fluid">
          <h2 className="vid">page title</h2>
-          <div className="row vid">
+          <div className="row">
               {/* <div *ngFor="let m of filteredMovies; index as j" class="col-md-4"> */}
                {this.state.movies.map(movie => {
                 return <Movie key={movie.id} 

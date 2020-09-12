@@ -9,11 +9,8 @@ body {
   background-color: var(--bg) !important;
 }
 
-.vid {
-  padding-left: 15px;
-}
 .figure-img {
-  border: 6px solid #fff;
+  border: 1px solid #fff;
   border-radius: 10px;
 }
 .card {
@@ -31,16 +28,16 @@ body {
       width: 25%;
   }
 }
-figcaption {
+.figure-caption {
   height: 35px;
   margin-top: 10px;
   font-weight: 600;
   font-size: 24px;
   margin-bottom: 10px;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  color: #FF001F;
+  white-space: nowrap !important;
+  text-overflow: ellipsis !important;
+  overflow: hidden !important;
+  color: #FF001F !important;
 }
 .r-date{
   float: left;
