@@ -15,20 +15,13 @@ export default class Movie extends Component {
 // poster_path: "/aKx1ARwG55zZ0GpRvU2WrGrCG9o.jpg"
 // release_date: "2020-09-04"
 // title: "Mulan"
-// video: false
 // vote_average: 7.7
-// vote_count: 1222
-console.log(this.props.movie)
-  const {id, original_title, overview, popularity, poster_path, release_date, title,video,
-  vote_average, vote_count } = this.props.movie;
-  console.log(poster_path)
+  const {backdrop_path, genre_ids, id, overview, poster_path, release_date, title, vote_average } = this.props.movie;
 
   const prefix = this.props.prefix
   
     return (
-      <section className="container-fluid my-3 custom-padd">
-        <div className="container-fluid">
-         <h2 className="vid">this is</h2>
+
           <div className="row vid">
                   <div className="card" >
                       <Link to="/movies'/m.id">
@@ -38,27 +31,12 @@ console.log(this.props.movie)
                       </figure>
                     </Link>
                       <div>
-                      <p className="r-date"><strong>{}</strong></p>
+                      <p className="r-date"><strong>{release_date}</strong></p>
                       <span className="fa fa-heart-o"></span>
                       <span className="fa fa-heart" ></span>
                     </div>
                   </div>
           </div>
-      </div>
-        {/* <ProductConsumer>
-          {(value) => {
-              const { kids, beauty } = value;
-              if (kids !== 'undefined'){
-                // console.log(kids[0].name)
-              return (
-              <React.Fragment>
-                  <Frame elem="elem" className="mx-xs-0 mx-lg-4 px-lg-4" />
-              </React.Fragment>
-              )}
-          }}
-         </ProductConsumer> */}
-
-      </section>
     );
   }
 }

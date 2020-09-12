@@ -32,7 +32,7 @@ export default class Home extends Component {
       try {
         const response = await axios.get(popularUrl);
         // console.log(response.data.results);
-        this.setState({movies: [response.data.results]})
+        this.setState({movies: response.data.results})
         // return response.data.results.map(movie => {
         //   return <Movie key={movie.id} 
         //   movie={movie} prefix={imgPrefix} />
@@ -74,7 +74,6 @@ export default class Home extends Component {
           <div className="row vid">
               {/* <div *ngFor="let m of filteredMovies; index as j" class="col-md-4"> */}
                {this.state.movies.map(movie => {
-                 console.log(movie)
                 return <Movie key={movie.id} 
                 movie={movie} prefix={this.state.imgPrefix} />
               })
