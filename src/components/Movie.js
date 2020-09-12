@@ -31,8 +31,8 @@ export default class Movie extends Component {
           </div>
         </Link >
           <div className="bot">
-          <p className="r-date"><strong>{release_date}</strong></p>
-          <span className="fa fa-heart-o"></span>
+          <p className="r-date text-muted">{release_date}</p>
+          {/* <span className="fa fa-heart-o">&#9825;</span> */}
           <span className="fa fa-heart" ></span>
         </div>
       </MovieWrapper>
@@ -46,12 +46,31 @@ const MovieWrapper = styled.div`
   text-decoration: none;
 }
 
-.fa-heart {
+.fa-heart, fa-heart-o {
   float:right;
   color: var(--mainRed);
+  transition: all 0.25s ease-in-out;
+}
+.fa-heart:hover {
+  font-size: 1.25rem;
 }
 .card-image{
   width:250; 
   height:300;
+}
+.title {
+  font-weight: 600;
+  font-size: 1.2rem;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;  
+  color: var(--mainRed);
+}
+.figure-img {
+  border: 1rem solid #fff;
+  border-radius: 10px;
+}
+.bot{
+  margin-bottom: -1.25rem
 }
 `;

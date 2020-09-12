@@ -4,10 +4,10 @@ import React, { Component } from "react";
 class Footer extends Component {
   render() {
     return (
-        <div className="container">
-          <p className="grey mt-4">
+        <div className="container footer">
+          <p className="grey mt-4 white">
             &copy; 2020{" "}
-            <a className="white" href="https://lollykrown.xyz">
+            <a className="" href="https://lollykrown.xyz">
               Ol&#250;wak&#225;y&#242;d&#233;.
             </a>{" "}
             All rights reserved.

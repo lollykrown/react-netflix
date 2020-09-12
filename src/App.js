@@ -8,6 +8,8 @@ import 'bootstrap/dist/js/bootstrap.min.js';
 import Navbar from './components/Navbar';
 import Home from './components/Home';
 import Footer from './components/Footer';
+import Default from './components/Default';
+import MovieList from './components/MovieList';
 
 function App() {
   return (
@@ -15,7 +17,11 @@ function App() {
     <Navbar/>
     <Switch>
       <Route exact path="/" component={Home} />
-      {/* <Route exact path="/accessories" component={() => <ProductList cat={"accessories"} />} /> */}
+      <Route exact path="/favorites" component={() => <MovieList cat={"favorites"} />} />           
+      <Route exact path="/popular" component={() => <MovieList cat={"popular"} />} /> 
+      <Route exact path="/top rated" component={() => <MovieList cat={"top"} />} />      
+      <Route exact path="/now playing" component={() => <MovieList cat={"now"} />} />           
+      <Route component={Default} />
     </Switch>
     <Footer />
   </React.Fragment>
