@@ -15,6 +15,7 @@ export default class MovieList extends Component {
     favorites:[],
     errorMessage: "",
     user: "",
+    isFav: false
   };
 
   componentDidMount() {
@@ -33,17 +34,21 @@ export default class MovieList extends Component {
     let tit;
     if (this.props.cat === "popular") {
       tit = "popular";
-      this.setState({ pageTitle: "Popular" });
+      this.setState({ pageTitle: "Popular Movies" });
     } else if (this.props.cat === "top") {
       tit = "top_rated";
-      this.setState({ pageTitle: "Top rated" });
+      this.setState({ pageTitle: "Top Rated Movies" });
     } else if (this.props.cat === "now") {
       tit = "now_playing";
       this.setState({ pageTitle: "Now playing" });
     }
-    console.log(tit);
 
     const movieUrl = `${url}${tit}?api_key=${apiKey}&language=${lang}`;
+
+    if (this.props.cat === "favorites") {
+        let cachedFav = JSON.parse(localStorage.getItem("movies"));
+        this.setState({ movies: cachedFav, isFav:true});
+      }
 
     try {
       const response = await axios.get(movieUrl);
@@ -79,16 +84,19 @@ export default class MovieList extends Component {
       <div className="container-fluid px-5">
         <h2 className="white mt-4">{this.state.pageTitle}</h2>
         <div className="row">
-          {this.state.movies.map((movie) => {
+          {/* {if(this.state.movies.length > 0){ */}
+
+            {this.state.movies.map((movie) => {
             return (
               <Movie
-              onClick={this.saveLocal(movie.id)}
                 key={movie.id}
                 movie={movie}
+                fav={this.state.isFav}
                 prefix={this.state.imgPrefix}
               />
             );
           })}
+            {/* } */}
         </div>
       </div>
     );

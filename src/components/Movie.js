@@ -7,7 +7,7 @@ export default class Movie extends Component {
   addToFav = (el) => {
     let movieCache = [];
     if (!localStorage.getItem("movies")) {
-      console.log("no movies cached yet");
+      console.log("no movie cached yet");
       movieCache.push(el);
       console.log(`${el.title} added`, movieCache);
       localStorage.setItem("movies", JSON.stringify(movieCache));
@@ -18,13 +18,30 @@ export default class Movie extends Component {
 
       const isthere = oldCache.find(e => e.id === el.id)
       console.log(isthere)
+
       if(!isthere){
       oldCache.push(el)
       console.log(`${el.title} added`, oldCache);
       localStorage.setItem("movies", JSON.stringify(oldCache));
-    }
+      alert(`${el.title} added to your favorites`)
+      } else {
+        alert(`${el.title} is already in your favorites`)
+
+      }
     }
   };
+  deleteFromfav = (el) => {
+    const fav = JSON.parse(localStorage.getItem('movies'));
+    console.log(fav)
+    const index = fav.findIndex(e => e.id === el.id)
+    const title = fav[index].title
+    console.log(index)
+    fav.splice(index, 1);
+    console.log(title, 'successfully deleted');
+    alert(title, 'successfully deleted');
+    localStorage.removeItem('movies');
+    localStorage.setItem('movies', JSON.stringify(fav));
+  }
 
   render() {
     // backdrop_path: "/xl5oCFLVMo4d4Pgxvrf8Jmc2IlA.jpg"
@@ -69,11 +86,19 @@ export default class Movie extends Component {
         </Link>
         <div className="bot">
           <p className="r-date text-muted">{release_date}</p>
-          {/* <span className="fa fa-heart-o">&#9825;</span> */}
+
+          {!this.props.fav?          
           <span
             className="fa fa-heart"
+            title="add to favorites"
             onClick={() => this.addToFav(this.props.movie)}
+          ></span>:
+          <span
+            className="fa fa-trash"
+            title="delete"
+            onClick={() => this.deleteFromfav(this.props.movie)}
           ></span>
+          }
         </div>
       </MovieWrapper>
     );
@@ -87,13 +112,13 @@ const MovieWrapper = styled.div`
   }
 
   .fa-heart,
-  fa-heart-o {
+  .fa-trash {
     float: right;
     color: var(--mainRed);
     transition: all 0.25s ease-in-out;
   }
-  .fa-heart:hover {
-    font-size: 1.25rem;
+  .fa-heart:hover, .fa-trash:hover {
+    font-size: 1.35rem;
   }
   .card-image {
     width: 250;
