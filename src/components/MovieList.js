@@ -12,6 +12,7 @@ export default class MovieList extends Component {
     imgPrefix: "https://image.tmdb.org/t/p/w500",
     pageTitle: "",
     movieDetails: {},
+    favorites:[],
     errorMessage: "",
     user: "",
   };
@@ -65,28 +66,13 @@ export default class MovieList extends Component {
     });
   };
 
-  // saveLocal = () => {
-  //   const cache = localStorage.getItem('movies');
-  //   if (cache !== null) {
-  //     const obj = JSON.parse(cache);
-  //     // const arr = [];
-  //     const arr = Object.keys(obj).map((key) => {
-  //       return Number(key), obj[key];
-  //     });
-  //     console.log(arr);
-  //     this.movies = arr;
-  //     this.filteredMovies = this.movies;
-  //   } else {
-  //     this.movieService.getMovies().subscribe({
-  //         next: movies => {
-  //           // const { results } = movies;
-  //           this.movies = movies;
-  //           console.log(this.movies);
-  //         },
-  //         error: err => this.errorMessage = err
-  //       });
-  //   }
-  // }
+  addToFav = (id) => {
+    let tempMovies = [...this.state.products];
+    const index = tempMovies.indexOf(this.getItem(id));
+    const movie = tempMovies[index];
+    this.saveLocal(movie)
+  };
+
 
   render() {
     return (
@@ -96,10 +82,10 @@ export default class MovieList extends Component {
           {this.state.movies.map((movie) => {
             return (
               <Movie
+              onClick={this.saveLocal(movie.id)}
                 key={movie.id}
                 movie={movie}
                 prefix={this.state.imgPrefix}
-                movieDetail={this.handleDetail(movie.id)}
               />
             );
           })}

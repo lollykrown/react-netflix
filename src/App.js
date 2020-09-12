@@ -17,10 +17,10 @@ function App() {
     <Navbar/>
     <Switch>
       <Route exact path="/" component={Home} />
-      <Route exact path="/favorites" component={() => <MovieList cat={"favorites"} />} />           
       <Route exact path="/popular" component={() => <MovieList cat={"popular"} />} /> 
       <Route exact path="/top rated" component={() => <MovieList cat={"top"} />} />      
-      <Route exact path="/now playing" component={() => <MovieList cat={"now"} />} />           
+      <Route exact path="/now playing" component={() => <MovieList cat={"now"} />} />
+      <Route exact path="/favorites" component={() => <MovieList cat={"favorites"} />} />                      
       <Route component={Default} />
     </Switch>
     <Footer />
