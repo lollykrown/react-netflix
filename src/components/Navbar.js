@@ -1,9 +1,6 @@
 import React, { Component } from "react";
-// import { ProductConsumer } from "../context";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-// import { ButtonContainer } from "./Button";
-// import ItemList from "./Home/ItemList";
 
 class Navbar extends Component {
   render() {
@@ -92,12 +89,10 @@ class Navbar extends Component {
 }
 
 const NavWrapper = styled.nav`
-//  background: var(--mainPurple) !important;
-//  .nav-link {
-//     color: var(--mainWhite);
-//     font-size: 1.3rem;
-//     text-transform: capitalize;
-//   }
+ .nav-link {
+    font-size: 1rem;
+    text-transform: capitalize;
+  }
 border-bottom: 2px solid rgba(255,255,255,0.65);
 .navbar-brand {
   color:rgba(255,255,255,0.65);

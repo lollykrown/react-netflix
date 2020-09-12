@@ -8,55 +8,26 @@ body {
   font-family: Roboto, 'Open Sans', sans-serif;
   background-color: var(--bg) !important;
 }
-
-.figure-img {
-  border: 1px solid #fff;
-  border-radius: 10px;
-}
 .card {
   box-shadow: 6px 6px 8px #777;
-  width: 230px;
-  margin: 20px;
-  padding: 10px;
+  margin: 1rem;
+  padding: 1rem;
   border-radius: 10px;
 }
 :hover {
   text-decoration: none;
 }
-@media (min-width: 992px){
-  .col-md-4 {
-      width: 25%;
-  }
-}
-.figure-caption {
-  height: 35px;
-  margin-top: 10px;
-  font-weight: 600;
-  font-size: 24px;
-  margin-bottom: 10px;
-  white-space: nowrap !important;
-  text-overflow: ellipsis !important;
-  overflow: hidden !important;
-  color: #FF001F !important;
-}
-.r-date{
-  float: left;
-  text-decoration: none;
-}
-.fa-heart-o {
-  margin-left: 120px;
-  margin-bottom: 10px;
-}
-.fa-heart {
-  margin-left: 120px;
-  margin-bottom: 10px;
-  color: #FF001F;
-}
 
-.avi {
-  height: 40px;
-  margin-right: 10px;
-  border: 2px solid #fff;
-  border-radius: 4px;
+.figure-caption {
+  font-weight: 600;
+  font-size: 1.2rem !important;
+  /* white-space: nowrap !important;
+  text-overflow: ellipsis !important;
+  overflow: hidden !important; */
+  color: var(--mainRed) !important;
+}
+.figure-img {
+  border: 1rem solid #fff;
+  border-radius: 10px;
 }
 
