@@ -23,14 +23,14 @@ export default class Movie extends Component {
     return (
       <MovieWrapper className="card col-md-4 col-lg-2" >
           <Link to="/movies'/m.id">
-          <div className="figure">
-            <img src={`${prefix}${poster_path}`} className="card-img img-fluid" alt="poster" width="200" height="250"/>            
-            <div className="card-body p-0">
-              <div className="figure-caption" title={title}>{title}</div>
+          <div className="">
+            <img src={`${prefix}${poster_path}`} className="card-img img-fluid" alt="poster"/>            
+            <div className="card-body p-0 mb-0">
+              <div className="title my-1" title={title}>{title}</div>
             </div>
           </div>
         </Link >
-          <div className="">
+          <div className="bot">
           <p className="r-date"><strong>{release_date}</strong></p>
           <span className="fa fa-heart-o"></span>
           <span className="fa fa-heart" ></span>
@@ -49,5 +49,9 @@ const MovieWrapper = styled.div`
 .fa-heart {
   float:right;
   color: var(--mainRed);
+}
+.card-image{
+  width:250; 
+  height:300;
 }
 `;

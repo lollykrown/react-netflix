@@ -10,24 +10,27 @@ body {
 }
 .card {
   box-shadow: 6px 6px 8px #777;
-  margin: 1rem;
-  padding: 1rem;
+  margin: 1.125rem;
+  padding: .75rem;
   border-radius: 10px;
 }
-:hover {
-  text-decoration: none;
+.title:hover {
+  text-decoration: none !important;
+  font-weight: 700;
 }
 
-.figure-caption {
+.title {
   font-weight: 600;
-  font-size: 1.2rem !important;
-  /* white-space: nowrap !important;
-  text-overflow: ellipsis !important;
-  overflow: hidden !important; */
-  color: var(--mainRed) !important;
+  font-size: 1.2rem;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;  
+  color: var(--mainRed);
 }
 .figure-img {
   border: 1rem solid #fff;
   border-radius: 10px;
 }
-
+.bot{
+  margin-bottom: -1rem
+}
