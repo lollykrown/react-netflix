@@ -15,7 +15,7 @@ function App() {
     <Navbar/>
     <Switch>
       <Route exact path="/" component={Home} />
-      <Route exact path="/accessories" component={() => <ProductList cat={"accessories"} />} />
+      {/* <Route exact path="/accessories" component={() => <ProductList cat={"accessories"} />} /> */}
     </Switch>
     <Footer />
   </React.Fragment>
