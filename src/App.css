@@ -1,21 +1,14 @@
 :root {
   --mainRed: #FF001F;
   --mainWhite: #FFFFFF;
+  --bg: #070707
 
 }
 body {
   font-family: Roboto, 'Open Sans', sans-serif;
-  background-color: #070707 !important;
+  background-color: var(--bg) !important;
 }
 
-
-.container-fluid {
-  position: relative;
-  margin-left: -10px;
-  margin-right: -15px;
-  margin-bottom: -15px;
-  background-color: #070707 !important;
-}
 .vid {
   padding-left: 15px;
 }
@@ -62,16 +55,11 @@ figcaption {
   margin-bottom: 10px;
   color: #FF001F;
 }
-.visible {
-  display: none;
-}
+
 .avi {
   height: 40px;
   margin-right: 10px;
   border: 2px solid #fff;
   border-radius: 4px;
 }
-.logout {
-  margin-right: 20px;
-  margin-left: 20px;
-}
+

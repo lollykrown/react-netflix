@@ -9,7 +9,7 @@ class Navbar extends Component {
   render() {
     return (
       <NavWrapper className="navbar navbar-expand-sm bg-default navbar-dark px-sm-5">
-      <Link className="navbar-brand" to="/">Mini-<span class="bran">Netflix</span></Link>
+      <Link className="navbar-brand" to="/">Mini-<span className="bran">Netflix</span></Link>
       <button
         className="navbar-toggler"
         type="button"
@@ -33,7 +33,7 @@ class Navbar extends Component {
               Favorites
             </Link>
           </li>
-          <li class="nav-item dropdown">
+          <li className="nav-item dropdown">
             <Link to="/" className="nav-link dropdown-toggle" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Categories
             </Link>
