@@ -21,8 +21,8 @@ export default class Movie extends Component {
   const prefix = this.props.prefix
   
     return (
-      <MovieWrapper className="card col-md-4 col-lg-2" >
-          <Link to="/movies'/m.id">
+      <MovieWrapper className="card col-md-4 col-lg-2" onClick={()=>this.props.handleDetail(id)}>
+          <Link to="/details">
           <div className="">
             <img src={`${prefix}${poster_path}`} className="card-img img-fluid" alt="poster"/>            
             <div className="card-body p-0 mb-0">
