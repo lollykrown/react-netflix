@@ -21,24 +21,26 @@ export default class Movie extends Component {
 console.log(this.props.movie)
   const {id, original_title, overview, popularity, poster_path, release_date, title,video,
   vote_average, vote_count } = this.props.movie;
+  console.log(poster_path)
+
   const prefix = this.props.prefix
   
     return (
       <section className="container-fluid my-3 custom-padd">
-        <div class="container-fluid">
-         <h2 class="vid">this is</h2>
-          <div class="row vid">
-                  <div class="card" >
+        <div className="container-fluid">
+         <h2 className="vid">this is</h2>
+          <div className="row vid">
+                  <div className="card" >
                       <Link to="/movies'/m.id">
-                      <figure class="figure">
-                        <img src={`${prefix}/${poster_path}`} class="figure-img img-fluid rounded" alt="poster" width="200" height="300"/>
-                        <figcaption class="figure-caption" title="m.title">test</figcaption>
+                      <figure className="figure">
+                        <img src={`${prefix}${poster_path}`} className="figure-img img-fluid rounded" alt="poster" width="200" height="300"/>
+                        <figcaption className="figure-caption" title={title}>{title}</figcaption>
                       </figure>
                     </Link>
                       <div>
-                      <p class="r-date"><strong>{}</strong></p>
-                      <span class="fa fa-heart-o"></span>
-                      <span class="fa fa-heart" ></span>
+                      <p className="r-date"><strong>{}</strong></p>
+                      <span className="fa fa-heart-o"></span>
+                      <span className="fa fa-heart" ></span>
                     </div>
                   </div>
           </div>

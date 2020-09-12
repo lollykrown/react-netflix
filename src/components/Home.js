@@ -6,7 +6,7 @@ export default class Home extends Component {
 
     state = {
       movies: [],
-      imgPrefix: 'https://image.tmdb.org/t/p/w500/',
+      imgPrefix: 'https://image.tmdb.org/t/p/w500',
       pageTitle: '',
       errorMessage: '',
       user: ''
@@ -74,6 +74,7 @@ export default class Home extends Component {
           <div className="row vid">
               {/* <div *ngFor="let m of filteredMovies; index as j" class="col-md-4"> */}
                {this.state.movies.map(movie => {
+                 console.log(movie)
                 return <Movie key={movie.id} 
                 movie={movie} prefix={this.state.imgPrefix} />
               })
