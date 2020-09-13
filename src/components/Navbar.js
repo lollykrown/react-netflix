@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import styled from "styled-components";
 
 class Navbar extends Component {
@@ -20,7 +20,7 @@ class Navbar extends Component {
       </button>
       <div className="collapse navbar-collapse" id="navbarSupportedContent">
         <ul className="navbar-nav align-items-center">
-          <li className="nav-item active ml-2">
+          <li className="nav-item ml-2">
             <Link to="/" className="nav-link">
               Home <span className="sr-only">(current)</span>
             </Link>
@@ -69,19 +69,6 @@ class Navbar extends Component {
             <button className="btn">Sign in</button>
           </li>
         </ul>
-        {/* <ProductConsumer>
-          {(value) => (
-            <Link to="/cart" className="ml-auto ">
-              <ButtonContainer>
-                <span>
-                  <i className="fas fa-cart-plus mr-2"></i>
-                </span>
-                my cart
-                <span className="btn btn-white ml-2">{value.totalItems}</span>
-              </ButtonContainer>
-            </Link>
-          )}
-        </ProductConsumer> */}
       </div>
     </NavWrapper>
     );
@@ -110,5 +97,13 @@ border-bottom: 2px solid rgba(255,255,255,0.65);
   background-color: var(--mainRed);
   color: var(--mainWhite);
 }
+.navbar-nav .nav-item .is-active {
+  /* color: var(--mainWhite) !important;
+  font-weight: 600; */
+  background-color: gold !important;
+  color:red !important ;
+  font-weight:bold;
+}
+
 `;
 export default Navbar;

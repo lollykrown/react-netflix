@@ -10,6 +10,7 @@ import Home from './components/Home';
 import Footer from './components/Footer';
 import Default from './components/Default';
 import MovieList from './components/MovieList';
+import MovieDetails from './components/MovieDetails';
 
 function App() {
   return (
@@ -17,13 +18,12 @@ function App() {
     <Navbar/>
     <Switch>
       <Route exact path="/" component={Home} />
-      <Route exact path="/popular" activeClassName="active" component={() => <MovieList cat={"popular"} />} /> 
+      <Route exact path="/popular" component={() => <MovieList cat={"popular"} />} /> 
       <Route exact path="/top rated" component={() => <MovieList cat={"top"} />} />      
       <Route exact path="/now playing" component={() => <MovieList cat={"now"} />} />
       <Route exact path="/favorites" 
-      activeClassName="navbar__link--active"
-      className="navbar__link"
-      component={() => <MovieList cat={"favorites"} />} />                      
+      component={() => <MovieList cat={"favorites"} />} />  
+      <Route path="/details" component={MovieDetails} />                    
       <Route component={Default} />
     </Switch>
     <Footer />
