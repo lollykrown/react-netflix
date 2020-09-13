@@ -3,10 +3,6 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 export default class Movie extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   state = {
     movieDetails: {}
   };
@@ -56,21 +52,20 @@ export default class Movie extends Component {
 
   render() {
     const {
-      backdrop_path,
-      genre_ids,
-      id,
-      overview,
+      // backdrop_path,
+      // genre_ids,
+      // id,
+      // overview,
       poster_path,
       release_date,
       title,
-      vote_average,
+      // vote_average,
     } = this.props.movie;
 
     const prefix = this.props.prefix;
-    console.log('par', this.state.movieDetails)
     return (
       <MovieWrapper className="card col-md-4 col-lg-2">
-        <Link to="/details" po={this.props.prefix}>
+        <Link to="/details" >
           <div className="">
             <img
               src={`${prefix}${poster_path}`}

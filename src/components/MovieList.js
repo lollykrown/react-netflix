@@ -3,10 +3,6 @@ import Movie from './Movie'
 import axios from 'axios';
 
 export default class MovieList extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   state = {
     movies: [],
     imgPrefix: "https://image.tmdb.org/t/p/w500",
@@ -25,9 +21,9 @@ export default class MovieList extends Component {
 
   getMovies = async () => {
     const url = "https://api.themoviedb.org/3/movie/";
-    const movieslistUrl =
-      "https://api.themoviedb.org/4/list/?page=1&api_key=0180207eb6ef9e35482bc3aa2a2b9672";
-    const searchUrl = "https://api.themoviedb.org/3/search/movie";
+    // const movieslistUrl =
+    //   "https://api.themoviedb.org/4/list/?page=1&api_key=0180207eb6ef9e35482bc3aa2a2b9672";
+    // const searchUrl = "https://api.themoviedb.org/3/search/movie";
     const apiKey = "0180207eb6ef9e35482bc3aa2a2b9672";
     const lang = "en-US";
 
@@ -58,6 +54,12 @@ export default class MovieList extends Component {
     }
   };
 
+  handleDetails = (el) => {
+    this.setState(() => {
+      return { movieDetails: el };
+    });
+  };
+
   render() {
     return (
       <div className="container-fluid px-5">
@@ -68,6 +70,7 @@ export default class MovieList extends Component {
             {this.state.movies.map((movie) => {
             return (
               <Movie
+                details={this.handleDetails}
                 key={movie.id}
                 movie={movie}
                 fav={this.state.isFav}

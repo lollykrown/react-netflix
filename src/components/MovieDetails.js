@@ -27,9 +27,8 @@ export default class MovieDetails extends Component {
     //   vote_average,
     // } = this.props.details;
 
-    console.log(this.props.po)
+    console.log(this.props.location)
     // const prefix = this.props.prefix;
-    const prefix =""
 
     return (
       <MovieWrapper className="card col-md-4 col-lg-2">
