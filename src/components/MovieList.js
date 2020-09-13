@@ -1,18 +1,20 @@
 import React, { Component } from 'react';
 import Movie from './Movie'
 import axios from 'axios';
+import { MovieConsumer } from '../context'
 
 export default class MovieList extends Component {
-  state = {
-    movies: [],
-    imgPrefix: "https://image.tmdb.org/t/p/w500",
-    pageTitle: "",
-    movieDetails: {},
-    favorites:[],
-    errorMessage: "",
-    user: "",
-    isFav: false
-  };
+  // state = {
+  //   movies: [],
+  //   imgPrefix: "https://image.tmdb.org/t/p/w500",
+  //   pageTitle: "",
+  //   movieDetails: {},
+  //   favorites:[],
+  //   errorMessage: "",
+  //   user: "",
+  //   isFav: false,
+  //   searchString:''
+  // };
 
   componentDidMount() {
     // this.saveLocal();
@@ -54,31 +56,46 @@ export default class MovieList extends Component {
     }
   };
 
+  handleSearch = (e) => {
+    this.setState(() => {
+      return { searchString: e.target.value };
+    });
+  }
   handleDetails = (el) => {
     this.setState(() => {
       return { movieDetails: el };
     });
   };
 
+  filter = () => {
+    this.state.movies.map(movie => {
+      return movie.title === this.state.searchString
+    })
+  }
   render() {
     return (
       <div className="container-fluid px-5">
         <h2 className="white mt-4">{this.state.pageTitle}</h2>
         <div className="row">
-          {/* {if(this.state.movies.length > 0){ */}
+        <MovieConsumer>
+            {value => {
+              console.log(value)
+          {/* {if(value.movies.length > 0){ */}
 
-            {this.state.movies.map((movie) => {
+            value.movies.map((movie) => {
             return (
               <Movie
-                details={this.handleDetails}
+                // details={this.handleDetails}
                 key={movie.id}
                 movie={movie}
-                fav={this.state.isFav}
-                prefix={this.state.imgPrefix}
+                fav={value.isFav}
+                prefix={value.imgPrefix}
               />
             );
-          })}
-            {/* } */}
+          })
+        // }
+          }}
+          </MovieConsumer>
         </div>
       </div>
     );
