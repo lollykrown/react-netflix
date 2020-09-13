@@ -58,27 +58,6 @@ export default class MovieList extends Component {
     }
   };
 
-  getItem = (id) => {
-    let movie;
-    movie = this.state.movies.find((m) => m.id === id);
-    return movie;
-  };
-
-  handleDetail = (id) => {
-    const movie = this.getItem(id);
-    this.setState(() => {
-      return { movieDetails: movie };
-    });
-  };
-
-  addToFav = (id) => {
-    let tempMovies = [...this.state.products];
-    const index = tempMovies.indexOf(this.getItem(id));
-    const movie = tempMovies[index];
-    this.saveLocal(movie)
-  };
-
-
   render() {
     return (
       <div className="container-fluid px-5">

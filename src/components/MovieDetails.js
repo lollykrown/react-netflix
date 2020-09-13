@@ -3,38 +3,6 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 export default class MovieDetails extends Component {
-      
-  addToFav = (el) => {
-    let movieCache = [];
-    if (!localStorage.getItem("movies")) {
-      console.log("no movie cached yet");
-      movieCache.push(el);
-      alert(`${el.title} added to your favorites`)
-      localStorage.setItem("movies", JSON.stringify(movieCache));
-    } else {
-      console.log("merge/update cached data");
-      let oldCache = JSON.parse(localStorage.getItem("movies"));
-      const isthere = oldCache.find(e => e.id === el.id)
-      if(!isthere){
-      oldCache.push(el)
-      localStorage.setItem("movies", JSON.stringify(oldCache));
-      alert(`${el.title} added to your favorites`)
-      } else {
-        alert(`${el.title} is already in your favorites`)
-
-      }
-    }
-  };
-  deleteFromfav = (el) => {
-    const fav = JSON.parse(localStorage.getItem('movies'));
-    const index = fav.findIndex(e => e.id === el.id)
-    const title = fav[index].title
-    console.log(index)
-    fav.splice(index, 1);
-    alert(title, 'successfully deleted');
-    localStorage.removeItem('movies');
-    localStorage.setItem('movies', JSON.stringify(fav));
-  }
 
   render() {
     // backdrop_path: "/xl5oCFLVMo4d4Pgxvrf8Jmc2IlA.jpg"
@@ -48,17 +16,18 @@ export default class MovieDetails extends Component {
     // release_date: "2020-09-04"
     // title: "Mulan"
     // vote_average: 7.7
-    const {
-      backdrop_path,
-      genre_ids,
-      id,
-      overview,
-      poster_path,
-      release_date,
-      title,
-      vote_average,
-    } = this.props.details;
+    // const {
+    //   backdrop_path,
+    //   genre_ids,
+    //   id,
+    //   overview,
+    //   poster_path,
+    //   release_date,
+    //   title,
+    //   vote_average,
+    // } = this.props.details;
 
+    console.log(this.props.po)
     // const prefix = this.props.prefix;
     const prefix =""
 
@@ -67,32 +36,29 @@ export default class MovieDetails extends Component {
         <Link to="/details">
           <div className="">
             <img
-              src={`${prefix}${poster_path}`}
+            //   src={`${prefix}${poster_path}`}
               className="card-img img-fluid"
               alt="poster"
             />
             <div className="card-body p-0 mb-0">
-              <div className="title my-1" title={title}>
+              {/* <div className="title my-1" title={title}>
                 {title}
-              </div>
+              </div> */}
             </div>
           </div>
         </Link>
         <div className="bot">
-          <p className="r-date text-muted">{release_date}</p>
+          {/* <p className="r-date text-muted">{release_date}</p> */}
 
-          {!this.props.fav?          
           <span
             className="fa fa-heart"
             title="add to favorites"
-            onClick={() => this.addToFav(this.props.movie)}
           ></span>:
           <span
             className="fa fa-trash"
             title="delete"
-            onClick={() => this.deleteFromfav(this.props.movie)}
           ></span>
-          }
+          
         </div>
       </MovieWrapper>
     );

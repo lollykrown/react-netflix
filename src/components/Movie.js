@@ -3,9 +3,18 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 export default class Movie extends Component {
+  constructor(props) {
+    super(props);
+  }
+
   state = {
     movieDetails: {}
   };
+
+  componentDidMount(){
+    this.setState({movieDetails: this.props.movie})
+
+  }
 
   addToFav = (el) => {
     let movieCache = [];
@@ -39,6 +48,12 @@ export default class Movie extends Component {
     localStorage.setItem('movies', JSON.stringify(fav));
   }
 
+  handleDetails = (el) => {
+    this.setState(() => {
+      return { movieDetails: el };
+    });
+  };
+
   render() {
     const {
       backdrop_path,
@@ -52,10 +67,10 @@ export default class Movie extends Component {
     } = this.props.movie;
 
     const prefix = this.props.prefix;
-
+    console.log('par', this.state.movieDetails)
     return (
       <MovieWrapper className="card col-md-4 col-lg-2">
-        <Link to="/details" details={this.props.movie}>
+        <Link to="/details" po={this.props.prefix}>
           <div className="">
             <img
               src={`${prefix}${poster_path}`}
