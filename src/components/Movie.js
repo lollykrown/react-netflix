@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-export default function Movie() {
+export default function Movie(props) {
   // addToFav = (el) => {
   //   let movieCache = [];
   //   if (!localStorage.getItem("movies")) {
@@ -50,10 +50,8 @@ export default function Movie() {
       release_date,
       title,
       // vote_average,
-    } = this.props.mo;
-    console.log('movie', this.props)
-
-    const prefix = this.props.prefix;
+    } = props.movie;
+    const prefix = props.prefix;
     return (
       <MovieWrapper className="card col-md-4 col-lg-2">
         <Link to="/details" >
@@ -73,7 +71,7 @@ export default function Movie() {
         <div className="bot">
           <p className="r-date text-muted">{release_date}</p>
 
-          {!this.props.fav?          
+          {/* {!this.props.fav?          
           <span
             className="fa fa-heart"
             title="add to favorites"
@@ -84,7 +82,7 @@ export default function Movie() {
             title="delete"
             onClick={() => this.deleteFromfav(this.props.movie)}
           ></span>
-          }
+          } */}
         </div>
       </MovieWrapper>
     );

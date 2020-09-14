@@ -35,7 +35,7 @@ class MovieProvider extends Component {
 
     try {
       const response = await axios.get(movieUrl);
-      console.log("con", response);
+      // console.log("con", response);
       this.setState({ movies: response.data.results });
     } catch (error) {
       console.error(error);
