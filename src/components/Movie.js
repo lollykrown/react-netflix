@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
@@ -54,7 +54,7 @@ export default function Movie(props) {
     const prefix = props.prefix;
     return (
       <MovieWrapper className="card col-md-4 col-lg-2">
-        <Link to="/details" >
+        <Link to={`movie/${props.movie.id}`} detail={props.movie}>
           <div className="">
             <img
               src={`${prefix}${poster_path}`}

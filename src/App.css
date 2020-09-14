@@ -26,3 +26,72 @@ body {
   position: absolute;
   bottom:0
 } */
+
+.card-title{
+  text-shadow: 2px 2px rgba(0,0,0,0.1);
+  font-weight: 700;
+  color:var(--mainRed)
+}
+
+.card-img {
+  border: 6px solid rgba(0,0,0,0.1);
+  border-radius: 10px;
+}
+
+.bg {
+  background-color: transparent;
+  position: absolute;
+  width: 95%;
+  left: 2rem;
+  top: 15rem;
+  z-index: 1;
+}
+.top-image, .img-bd {
+  width:100% !important;
+
+}
+
+.cast {
+  margin-left: 20px;
+  margin-top: 30px;
+}
+.cast-img {
+  border: 4px solid var(--mainRed);
+  border-radius: 10px;
+  margin: 5px;
+}
+.cast-span {
+  float: left;
+  margin-right: 10px;
+}
+.cast-text {
+  text-overflow: ellipsis;
+  width: 60px;
+}
+.btn{
+  background-color: var(--mainRed) !important;
+  color: var(--mainWhite) !important;
+}
+.trailer {
+  margin-left: 20px;
+  margin-top: 150px;
+  position: absolute;
+}
+.trailer-div {
+  float: left;
+  margin-right: 10px;
+}
+
+iframe {
+  float: left;
+  border: 4px solid #fff;
+  border-radius: 10px;
+}
+.stars {
+  float: left;
+  margin-right: 15px;
+}
+.stars-no {
+  color: #FFF;
+  font-weight: 600;
+}

@@ -11,8 +11,6 @@ export default function MovieList(props) {
 
   const [imgPrefix, setprefix] = useState(prefix)
 
-
-
   useEffect(() =>{
     getMovies()
   }, [])
