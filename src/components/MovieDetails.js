@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import axios from "axios";
-import moment from 'moment';
-
+import moment from "moment";
 
 export default function MovieDetails(props) {
   const url = "https://api.themoviedb.org/3/movie/";
@@ -23,8 +22,8 @@ export default function MovieDetails(props) {
     vote_average,
   } = movie;
 
-  const ratings = vote_average/2;
-  const date = moment(release_date).format('MMMM YYYY');
+  const ratings = vote_average / 2;
+  const date = moment(release_date).format("MMMM YYYY");
 
   useEffect(() => {
     getMovieById();
@@ -36,6 +35,12 @@ export default function MovieDetails(props) {
     getCast();
   }, []);
 
+  const [trailers, setTrailers] = useState([]);
+
+  useEffect(() => {
+    getTrailers();
+  }, []);
+
   const getMovieById = async () => {
     const detailsUrl = `${url}${props.match.params.id}?api_key=${apiKey}&language=${lang}`;
 
@@ -43,28 +48,37 @@ export default function MovieDetails(props) {
 
     try {
       const response = await axios.get(detailsUrl);
-      console.log('movie',response.data);
+      console.log("movies", response.data);
       setMovie(response.data);
     } catch (error) {
       console.error(error);
     }
   };
 
-  const getCast = async () =>{
+  const getCast = async () => {
     const castUrl = `${url}${props.match.params.id}/credits?api_key=${apiKey}`;
 
     try {
       const response = await axios.get(castUrl);
-      console.log('cast', response.data);
+      console.log("cast", response.data);
       setCast(response.data.cast);
     } catch (error) {
       console.error(error);
     }
-  }
+  };
+
+  const getTrailers = async () => {
+    const trailersUrl = `${url}${props.match.params.id}$/videos?api_key=${apiKey}&language=${lang}`;
+
+    try {
+      const response = await axios.get(trailersUrl);
+      console.log("trailers", response.data.results);
+      setTrailers(response.data.results);
+    } catch (error) {
+      console.error(error);
+    }
+  };
   // genre_ids: (5) [28, 12, 18, 14, 10752]
-  // id: 337401
-  // original_title: "Mulan"
-  // popularity: 2340.511
   // vote_average: 7.7
 
   return (
@@ -79,7 +93,7 @@ export default function MovieDetails(props) {
         </div>
 
         <div className="bg">
-          <div className="row card mb-3">
+          <div className="row card ">
             <div className="row no-gutters">
               <div className="col-sm-6 col-lg-2 ">
                 <img
@@ -97,49 +111,55 @@ export default function MovieDetails(props) {
                 <span className="badge badge-info mr-2">Adventure</span>
                 <span className="badge badge-danger mr-2">Drama</span>
                 <span className="badge badge-success">Thriller</span>
-                <p className="card-text">
-                  <small>120mins</small>
-                </p>
-                <p className="card-text">
+                <p className="card-text mt-3">
                   <small className="mr-3">{date}</small>
                   <span className="badge btn stars-no">{ratings}</span>
                 </p>
                 <span className="fa fa-heart" title="add to favorites"></span>
                 <span className="fa fa-trash" title="delete"></span>
               </div>
-              
+
               <div className="col-lg-5 ml-3">
-                  <p className="card-title">Cast</p>
-                  <div className="cast row">
-                  {cast.map(c => {
-                    if(c.profile_path){
-                    return(
-                  <div key={c.id} className="">
-                    <div className="cast-span col-lg-2">
-                      <img
-                        className="cast-img"
-                        src={`${prefix}${c.profile_path}`}
-                        alt={c.name}
-                        width="60px"
-                        height="60px"
-                      />
-                      <p className="cast-text">{c.name}</p>
-                    </div>
-                  </div>
-                    )}
+                <p className="card-title">Cast</p>
+                <div className="cast row">
+                  {cast.map((c) => {
+                    if (c.profile_path) {
+                      return (
+                        <div key={c.id} className="">
+                          <div className="cast-span col-lg-2" title={c.name}>
+                            <img
+                              className="cast-img"
+                              src={`${prefix}${c.profile_path}`}
+                              alt={c.name}
+                              width="60px"
+                              height="60px"
+                            />
+                            <p className="cast-text">{c.name}</p>
+                          </div>
+                        </div>
+                      );
+                    }
                   })}
                 </div>
-                <div className="trailer">
-                  <p>Trailer</p>
-                  <div className="trailer-div">
-                    <span className="trailer-span">
-                      {/* <iframe width="220px" height="140px"
-                              src="sanitizer.bypassSecurityTrustResourceUrl('https://www.youtube.com/embed/' + v.key + '?autoplay=1&fs=1&iv_load_policy=3&showinfo=0&rel=0&cc_load_policy=0&start=0&end=0&origin=https://youtubeembedcode.com')"/>
-                    </iframe> */}
-                    </span>
-                  </div>
-                </div>
               </div>
+            </div>
+          </div>
+          <div className="row card">
+            <p className="card-title">Trailer</p>
+            <div className="trailer-div">
+              {trailers.map((t) => {
+                if (t.key) {
+                  return (
+                    <span className="trailer-span">
+                      <iframe
+                        width="220px"
+                        height="140px"
+                        src={`https://www.youtube.com/embed/${t.key}?autoplay=1&fs=1&iv_load_policy=3&showinfo=0&rel=0&cc_load_policy=0&start=0&end=0&origin=https://youtubeembedcode.com`}
+                      ></iframe>
+                    </span>
+                  );
+                }
+              })}
             </div>
           </div>
         </div>
@@ -149,12 +169,13 @@ export default function MovieDetails(props) {
 }
 
 const MovieWrapper = styled.div`
-.fa-heart,
-.fa-trash {
-  color: var(--mainRed) !important;
-  transition: all 0.25s ease-in-out;
-}
-.fa-heart:hover, .fa-trash:hover {
-  font-size: 1.35rem;
-}
+  .fa-heart,
+  .fa-trash {
+    color: var(--mainRed) !important;
+    transition: all 0.25s ease-in-out;
+  }
+  .fa-heart:hover,
+  .fa-trash:hover {
+    font-size: 1.35rem;
+  }
 `;

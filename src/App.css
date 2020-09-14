@@ -67,11 +67,7 @@ body {
   background-color: var(--mainRed) !important;
   color: var(--mainWhite) !important;
 }
-.trailer {
-  margin-left: 20px;
-  margin-top: 150px;
-  position: absolute;
-}
+
 .trailer-div {
   float: left;
   margin-right: 10px;
