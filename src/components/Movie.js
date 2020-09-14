@@ -3,10 +3,6 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 export default class Movie extends Component {
-  constructor(props){
-    super(props)
-  }
-
   addToFav = (el) => {
     let movieCache = [];
     if (!localStorage.getItem("movies")) {
@@ -55,10 +51,11 @@ export default class Movie extends Component {
       release_date,
       title,
       // vote_average,
-    } = this.props.movie;
-    console.log('movie', this.props)
+    } = this.props.mo;
+    console.log('movie', this.props.mo)
 
     const prefix = this.props.prefix;
+    console.log(prefix)
     return (
       <MovieWrapper className="card col-md-4 col-lg-2">
         <Link to="/details" >

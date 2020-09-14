@@ -4,22 +4,6 @@ import axios from 'axios';
 import { MovieConsumer } from '../context'
 
 export default class MovieList extends Component {
-  // state = {
-  //   movies: [],
-  //   imgPrefix: "https://image.tmdb.org/t/p/w500",
-  //   pageTitle: "",
-  //   movieDetails: {},
-  //   favorites:[],
-  //   errorMessage: "",
-  //   user: "",
-  //   isFav: false,
-  //   searchString:''
-  // };
-
-  componentDidMount() {
-    this.getMovies();
-  }
-
   getMovies = async () => {
     const url = "https://api.themoviedb.org/3/movie/";
     // const movieslistUrl =
@@ -84,6 +68,7 @@ export default class MovieList extends Component {
             return (<h1>Loading</h1>);
             }
             value.movies.map((movie) => {
+              // console.log('there\'s data', movie)
             return (
               <Movie
                 // details={this.handleDetails}
