@@ -9,7 +9,6 @@ export default function MovieDetails(props) {
   const prefix = "https://image.tmdb.org/t/p/w500";
 
   const [movie, setMovie] = useState({});
-  const [cast, setCast] = useState([]);
 
   const {
     backdrop_path,
@@ -22,12 +21,16 @@ export default function MovieDetails(props) {
     vote_average,
   } = movie;
 
+  const ratings = vote_average/2;
+
   useEffect(() => {
     getMovieById();
   }, []);
 
+  const [cast, setCast] = useState([]);
+
   useEffect(() => {
-    getCast(id);
+    getCast();
   }, []);
 
   const getMovieById = async () => {
@@ -37,20 +40,20 @@ export default function MovieDetails(props) {
 
     try {
       const response = await axios.get(detailsUrl);
-      console.log(response.data);
+      console.log('movie',response.data);
       setMovie(response.data);
     } catch (error) {
       console.error(error);
     }
   };
 
-  const getCast = async (id) =>{
-    const castUrl = `${url}${id}/credits?api_key=${apiKey}`;
+  const getCast = async () =>{
+    const castUrl = `${url}${props.match.params.id}/credits?api_key=${apiKey}`;
 
     try {
       const response = await axios.get(castUrl);
-      console.log('cast', response);
-      // setMovie(response.data);
+      console.log('cast', response.data);
+      setCast(response.data.cast);
     } catch (error) {
       console.error(error);
     }
@@ -100,27 +103,31 @@ export default function MovieDetails(props) {
                 {/* <app-star className="stars" [rating]="movie.vote_average/2"
                                         (ratingClicked)='onRatingClicked($event)'>
                                 </app-star> */}
-                <span className="badge btn stars-no">{vote_average / 2}</span>
+                <span className="badge btn stars-no">{ratings}</span>
                 <span className="fa fa-heart" title="add to favorites"></span>:
                 <span className="fa fa-trash" title="delete"></span>
               </div>
               
-              <div className="col-lg-5">
-                <div className="cast">
-                  <p>Cast</p>
-                  <div>
-                    <span className="cast-span">
+              <div className="col-lg-5 ml-3">
+                  <p className="card-title">Cast</p>
+                  <div className="cast row">
+                  {cast.map(c => {
+                    if(c.profile_path){
+                    return(
+                  <div className="">
+                    <div className="cast-span col-lg-2">
                       <img
                         className="cast-img"
-                        src="'https://image.tmdb.org/t/p/w500/' + c?.profile_path"
-                        alt="c.name"
+                        src={`${prefix}${c.profile_path}`}
+                        alt={c.name}
                         width="60px"
                         height="60px"
                       />
-                      <p className="cast-text">{"name"}</p>
-                      <p>{"name"}</p>
-                    </span>
+                      <p className="cast-text">{c.name}</p>
+                    </div>
                   </div>
+                    )}
+                  })}
                 </div>
                 <div className="trailer">
                   <p>Trailer</p>
@@ -141,4 +148,7 @@ export default function MovieDetails(props) {
   );
 }
 
-const MovieWrapper = styled.div``;
+const MovieWrapper = styled.div
+`
+
+`;
