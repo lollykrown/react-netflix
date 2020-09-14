@@ -83,7 +83,7 @@ export default function MovieDetails(props) {
 
   return (
     <MovieWrapper>
-      <div className="">
+      <div className="parent">
         <div className="top-image">
           <img
             className="img-fluid img-bd"
@@ -95,7 +95,7 @@ export default function MovieDetails(props) {
         <div className="bg">
           <div className="row card ">
             <div className="row no-gutters">
-              <div className="col-sm-6 col-lg-2 ">
+              <div className="col-sm-5 col-lg-2 ">
                 <img
                   src={`${prefix}${poster_path}`}
                   className="card-img img-fluid"
@@ -145,18 +145,27 @@ export default function MovieDetails(props) {
             </div>
           </div>
           <div className="row card">
-            <p className="card-title">Trailer</p>
+            <h3 className="card-title">Trailers</h3>
             <div className="trailer-div">
               {trailers.map((t) => {
                 if (t.key) {
                   return (
-                    <span className="trailer-span">
-                      <iframe
-                        width="220px"
-                        height="140px"
-                        src={`https://www.youtube.com/embed/${t.key}?autoplay=1&fs=1&iv_load_policy=3&showinfo=0&rel=0&cc_load_policy=0&start=0&end=0&origin=https://youtubeembedcode.com`}
-                      ></iframe>
-                    </span>
+                    <div>
+                      <span className="trailer-span">
+                        <iframe
+                          width="350px"
+                          height="200px"
+                          src={`https://www.youtube.com/embed/${t.key}?autoplay=1&fs=1&iv_load_policy=3&showinfo=0&rel=0&cc_load_policy=0&start=0&end=0&origin=https://youtubeembedcode.com`}
+                        ></iframe>
+                      </span>
+                      <span className="trailer-span">
+                        <iframe
+                          width="350px"
+                          height="200px"
+                          src={`https://www.youtube.com/embed/${t.key}?autoplay=1&fs=1&iv_load_policy=3&showinfo=0&rel=0&cc_load_policy=0&start=0&end=0&origin=https://youtubeembedcode.com`}
+                        ></iframe>
+                      </span>
+                    </div>
                   );
                 }
               })}

@@ -11,6 +11,7 @@ import Footer from './components/Footer';
 import Default from './components/Default';
 import MovieList from './components/MovieList';
 import MovieDetails from './components/MovieDetails';
+import Loading from './components/Loading';
 
 function App() {
   return (
@@ -22,7 +23,8 @@ function App() {
       <Route exact path="/top rated" component={() => <MovieList cat={"top"} />} />      
       <Route exact path="/now playing" component={() => <MovieList cat={"now"} />} />
       <Route exact path="/favorites" component={() => <MovieList cat={"favorites"} />} />  
-      <Route exact path="/movie/:id" component={MovieDetails} />                    
+      <Route exact path="/movie/:id" component={MovieDetails} />   
+      <Route exact path="/loading" component={Loading} />                                     
       <Route component={Default} />
     </Switch>
     <Footer />

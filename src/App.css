@@ -41,13 +41,18 @@ body {
 .bg {
   background-color: transparent;
   position: absolute;
-  width: 95%;
-  left: 2rem;
+  width: 94%;
+  left: 3rem;
   top: 15rem;
   z-index: 1;
 }
+
 .top-image, .img-bd {
-  width:100% !important;
+  position:relative;
+  width:100%;
+  top:5px;
+  z-index:-1;
+  max-height:50vh
 }
 
 .cast-img {
