@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 
-class Default extends Component {
-  
-  render(){
+function Default() {
     console.log(this.props)
     return (
         <div className="container">
@@ -18,7 +16,6 @@ class Default extends Component {
            </div>
         </div>
     );
-  }
 }
 
 export default Default;

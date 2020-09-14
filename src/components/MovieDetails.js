@@ -2,9 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-export default class MovieDetails extends Component {
-
-  render() {
+export default function MovieDetails() {
     // backdrop_path: "/xl5oCFLVMo4d4Pgxvrf8Jmc2IlA.jpg"
     // genre_ids: (5) [28, 12, 18, 14, 10752]
     // id: 337401
@@ -61,7 +59,6 @@ export default class MovieDetails extends Component {
         </div>
       </MovieWrapper>
     );
-  }
 }
 
 const MovieWrapper = styled.div`

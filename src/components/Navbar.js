@@ -2,8 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-class Navbar extends Component {
-  render() {
+function Navbar(){
     return (
       <NavWrapper className="navbar navbar-expand-sm bg-default navbar-dark px-sm-5">
       <Link className="navbar-brand" to="/">Mini-<span className="bran">Netflix</span></Link>
@@ -72,7 +71,6 @@ class Navbar extends Component {
       </div>
     </NavWrapper>
     );
-  }
 }
 
 const NavWrapper = styled.nav`

@@ -1,10 +1,17 @@
-import React, { Component } from 'react';
-import Product from './Product'
+import React, { useState, useEffect } from 'react';
+import Movie from './Movie'
 import axios from 'axios';
 import { MovieConsumer } from '../context'
 
-export default class MovieList extends Component {
-  getMovies = async () => {
+export default function MovieList() {
+  [movies, setMovies] = useState([])
+
+  useEffect(() =>{
+    getMovies()
+  })
+
+
+  const getMovies = async () => {
     const url = "https://api.themoviedb.org/3/movie/";
     // const movieslistUrl =
     //   "https://api.themoviedb.org/4/list/?page=1&api_key=0180207eb6ef9e35482bc3aa2a2b9672";
@@ -28,7 +35,7 @@ export default class MovieList extends Component {
 
     if (this.props.cat === "favorites") {
         let cachedFav = JSON.parse(localStorage.getItem("movies"));
-        this.setState({ movies: cachedFav, isFav:true});
+        this.setMovies({ movies: cachedFav, isFav:true});
       }
 
     try {
@@ -39,23 +46,22 @@ export default class MovieList extends Component {
     }
   };
 
-  handleSearch = (e) => {
+  const handleSearch = (e) => {
     this.setState(() => {
       return { searchString: e.target.value };
     });
   }
-  handleDetails = (el) => {
+  const handleDetails = (el) => {
     this.setState(() => {
       return { movieDetails: el };
     });
   };
 
-  filter = () => {
+  const filter = () => {
     this.state.movies.map(movie => {
       return movie.title === this.state.searchString
     })
   }
-  render() {
     return (
       <div className="container-fluid px-5">
         {/* <h2 className="white mt-4">{this.state.pageTitle}</h2> */}
@@ -68,7 +74,7 @@ export default class MovieList extends Component {
               // console.log('there\'s data', movie)
               return (
                 // <h1 className="text-danger"> {m}</h1>
-                <Product
+                <Movie
                   // details={this.handleDetails}
                   test={"test"}
                   key={movie.id}
@@ -89,6 +95,5 @@ export default class MovieList extends Component {
         </div>
       </div>
     );
-  }
 }
 

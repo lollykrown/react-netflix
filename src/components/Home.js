@@ -1,11 +1,9 @@
 import React, { Component } from "react";
 import MovieList from './MovieList'
 
-export default class Home extends Component {
+export default function Home(){
 
-  render() {
     return (
       <MovieList cat={"popular"} />
     );
-  }
 }

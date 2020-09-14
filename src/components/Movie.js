@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-export default class Movie extends Component {
+export default function Movie() {
   // addToFav = (el) => {
   //   let movieCache = [];
   //   if (!localStorage.getItem("movies")) {
@@ -41,7 +41,6 @@ export default class Movie extends Component {
   //   });
   // };
 
-  render() {
     const {
       // backdrop_path,
       // genre_ids,
@@ -89,7 +88,6 @@ export default class Movie extends Component {
         </div>
       </MovieWrapper>
     );
-  }
 }
 
 const MovieWrapper = styled.div`
