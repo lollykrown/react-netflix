@@ -4,17 +4,21 @@ import axios from 'axios';
 const MovieContext = React.createContext();
 
 class MovieProvider extends Component {
-    state = {
-        movies: [],
-        imgPrefix: "https://image.tmdb.org/t/p/w500",
-        pageTitle: "",
-        movieDetails: {},
-        favorites:[],
-        errorMessage: "",
-        user: "",
-        isFav: false,
-        searchString:''
-      };
+  constructor(props){
+    super(props);
+    this.state = {
+      movies: [],
+      imgPrefix: "https://image.tmdb.org/t/p/w500",
+      pageTitle: "",
+      movieDetails: {},
+      favorites:[],
+      errorMessage: "",
+      user: "",
+      isFav: false,
+      searchString:''
+    };
+  }
+
 
       componentDidMount() {
         this.getMovies();
@@ -29,11 +33,6 @@ class MovieProvider extends Component {
         const lang = "en-US";
     
         const movieUrl = `${url}popular?api_key=${apiKey}&language=${lang}`;
-    
-        if (this.props.cat === "favorites") {
-            let cachedFav = JSON.parse(localStorage.getItem("movies"));
-            this.setState({ movies: cachedFav, isFav:true});
-          }
     
         try {
           const response = await axios.get(movieUrl);

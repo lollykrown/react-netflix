@@ -79,8 +79,10 @@ export default class MovieList extends Component {
         <MovieConsumer>
             {value => {
               console.log('ml',value)
-          {/* {if(value.movies.length > 0){ */}
-
+          if(value.movies.length < 1){ 
+            console.log('empty')
+            return (<h1>Loading</h1>);
+            }
             value.movies.map((movie) => {
             return (
               <Movie
@@ -92,7 +94,7 @@ export default class MovieList extends Component {
               />
             );
           })
-        // }
+        
           }}
           </MovieConsumer>
         </div>

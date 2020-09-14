@@ -3,13 +3,8 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 export default class Movie extends Component {
-  state = {
-    movieDetails: {}
-  };
-
-  componentDidMount(){
-    this.setState({movieDetails: this.props.movie})
-
+  constructor(props){
+    super(props)
   }
 
   addToFav = (el) => {
@@ -61,6 +56,7 @@ export default class Movie extends Component {
       title,
       // vote_average,
     } = this.props.movie;
+    console.log('movie', this.props)
 
     const prefix = this.props.prefix;
     return (
