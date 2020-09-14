@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Movie from './Movie'
 import axios from 'axios';
-import { MovieConsumer } from '../context'
 
 export default function MovieList(props) {
   const [movies, setMovies] = useState([]);
@@ -51,22 +50,17 @@ export default function MovieList(props) {
     }
   };
 
-  const handleSearch = (e) => {
-    this.setState(() => {
-      return { searchString: e.target.value };
-    });
-  }
-  const handleDetails = (el) => {
-    this.setState(() => {
-      return { movieDetails: el };
-    });
-  };
+  // const handleSearch = (e) => {
+  //   this.setState(() => {
+  //     return { searchString: e.target.value };
+  //   });
+  // }
 
-  const filter = () => {
-    this.state.movies.map(movie => {
-      return movie.title === this.state.searchString
-    })
-  }
+  // const filter = () => {
+  //   this.state.movies.map(movie => {
+  //     return movie.title === this.state.searchString
+  //   })
+  // }
 
     return (
       <div className="container-fluid px-5">

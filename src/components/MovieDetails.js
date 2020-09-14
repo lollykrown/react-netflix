@@ -13,8 +13,8 @@ export default function MovieDetails(props) {
 
   const {
     backdrop_path,
-    genre_ids,
-    id,
+    // genre_ids,
+    // id,
     overview,
     poster_path,
     release_date,
@@ -27,19 +27,19 @@ export default function MovieDetails(props) {
 
   useEffect(() => {
     getMovieById();
-  }, []);
+  },[]);
 
   const [cast, setCast] = useState([]);
 
   useEffect(() => {
     getCast();
-  }, []);
+  },[]);
 
   const [trailers, setTrailers] = useState([]);
 
   useEffect(() => {
     getTrailers();
-  }, []);
+  },[]);
 
   const getMovieById = async () => {
     const detailsUrl = `${url}${props.match.params.id}?api_key=${apiKey}&language=${lang}`;
@@ -122,7 +122,7 @@ export default function MovieDetails(props) {
               <div className="col-lg-5 ml-3">
                 <p className="card-title">Cast</p>
                 <div className="cast row">
-                  {cast.map((c) => {
+                  {cast.map(c => {
                     if (c.profile_path) {
                       return (
                         <div key={c.id} className="">
@@ -147,12 +147,13 @@ export default function MovieDetails(props) {
           <div className="row card">
             <h3 className="card-title">Trailers</h3>
             <div className="trailer-div">
-              {trailers.map((t) => {
+              {trailers.map(t => {
                 if (t.key) {
                   return (
                     <div>
                       <span className="trailer-span">
                         <iframe
+                          title={movie.title}
                           width="350px"
                           height="200px"
                           src={`https://www.youtube.com/embed/${t.key}?autoplay=1&fs=1&iv_load_policy=3&showinfo=0&rel=0&cc_load_policy=0&start=0&end=0&origin=https://youtubeembedcode.com`}
@@ -160,6 +161,7 @@ export default function MovieDetails(props) {
                       </span>
                       <span className="trailer-span">
                         <iframe
+                          title={movie.title}
                           width="350px"
                           height="200px"
                           src={`https://www.youtube.com/embed/${t.key}?autoplay=1&fs=1&iv_load_policy=3&showinfo=0&rel=0&cc_load_policy=0&start=0&end=0&origin=https://youtubeembedcode.com`}
