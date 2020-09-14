@@ -28,19 +28,7 @@ class MovieProvider extends Component {
         const apiKey = "0180207eb6ef9e35482bc3aa2a2b9672";
         const lang = "en-US";
     
-        let tit;
-        if (this.props.cat === "popular") {
-          tit = "popular";
-          this.setState({ pageTitle: "Popular Movies" });
-        } else if (this.props.cat === "top") {
-          tit = "top_rated";
-          this.setState({ pageTitle: "Top Rated Movies" });
-        } else if (this.props.cat === "now") {
-          tit = "now_playing";
-          this.setState({ pageTitle: "Now playing" });
-        }
-    
-        const movieUrl = `${url}${tit}?api_key=${apiKey}&language=${lang}`;
+        const movieUrl = `${url}popular?api_key=${apiKey}&language=${lang}`;
     
         if (this.props.cat === "favorites") {
             let cachedFav = JSON.parse(localStorage.getItem("movies"));
@@ -49,6 +37,7 @@ class MovieProvider extends Component {
     
         try {
           const response = await axios.get(movieUrl);
+          console.log('con',response)
           this.setState({ movies: response.data.results });
         } catch (error) {
           console.error(error);
@@ -76,7 +65,7 @@ class MovieProvider extends Component {
       handleDetail = (category, id) => {
         const product = this.getItem(category, id);
         this.setState(() => {
-          return { detailProduct: product };
+          return { movieDetails: product };
         });
       };
 

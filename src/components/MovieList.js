@@ -17,7 +17,6 @@ export default class MovieList extends Component {
   // };
 
   componentDidMount() {
-    // this.saveLocal();
     this.getMovies();
   }
 
@@ -75,11 +74,11 @@ export default class MovieList extends Component {
   render() {
     return (
       <div className="container-fluid px-5">
-        <h2 className="white mt-4">{this.state.pageTitle}</h2>
+        {/* <h2 className="white mt-4">{this.state.pageTitle}</h2> */}
         <div className="row">
         <MovieConsumer>
             {value => {
-              console.log(value)
+              console.log('ml',value)
           {/* {if(value.movies.length > 0){ */}
 
             value.movies.map((movie) => {
