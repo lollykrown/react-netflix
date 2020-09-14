@@ -50,24 +50,15 @@ body {
   width:100% !important;
 }
 
-.cast {
-  overflow: hidden
-}
 .cast-img {
-  border: 4px solid var(--mainRed);
+  border: 3px solid var(--mainRed);
   border-radius: 10px;
 }
-.cast-span {
-  float: left;
-  margin-right: 10px;
-}
-/* .cast-text {
-  text-overflow: ellipsis;
-  width: 60px;
-} */
 .cast-text {
   width:60px;
-  white-space: nowrap;
+  font-size: .75rem;
+  max-lines: 2;
+  white-space: wrap;
   text-overflow: ellipsis;
   overflow: hidden;
   color: var(--mainRed);

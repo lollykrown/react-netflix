@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import axios from "axios";
+import moment from 'moment';
+
 
 export default function MovieDetails(props) {
   const url = "https://api.themoviedb.org/3/movie/";
@@ -22,6 +24,12 @@ export default function MovieDetails(props) {
   } = movie;
 
   const ratings = vote_average/2;
+  // moment().format();
+  console.log('dae',release_date)
+
+  const dat = moment(release_date).format('MMMM YYYY');
+  // const dat = new Date(release_date)
+  console.log('date',dat)
 
   useEffect(() => {
     getMovieById();
@@ -86,9 +94,9 @@ export default function MovieDetails(props) {
                 />
               </div>
               <div className="col-sm-6 col-lg-4 card-body pt-0 ml-3">
-                <h5 className="card-title ">{title}</h5>
+                <h4 className="card-title ">{title}</h4>
                 <p className="card-text">{overview}</p>
-                <button type="button" className="btn mr-2">
+                <button type="button" className="btn mr-2 mt-2">
                   PG-13
                 </button>
                 <span className="badge badge-info mr-2">Adventure</span>
@@ -100,9 +108,6 @@ export default function MovieDetails(props) {
                 <p className="card-text">
                   <small className="tt">{release_date}</small>
                 </p>
-                {/* <app-star className="stars" [rating]="movie.vote_average/2"
-                                        (ratingClicked)='onRatingClicked($event)'>
-                                </app-star> */}
                 <span className="badge btn stars-no">{ratings}</span>
                 <span className="fa fa-heart" title="add to favorites"></span>:
                 <span className="fa fa-trash" title="delete"></span>
