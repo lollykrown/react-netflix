@@ -2,38 +2,38 @@ import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-export default function Movie(props) {
-  // addToFav = (el) => {
-  //   let movieCache = [];
-  //   if (!localStorage.getItem("movies")) {
-  //     console.log("no movie cached yet");
-  //     movieCache.push(el);
-  //     alert(`${el.title} added to your favorites`)
-  //     localStorage.setItem("movies", JSON.stringify(movieCache));
-  //   } else {
-  //     console.log("merge/update cached data");
-  //     let oldCache = JSON.parse(localStorage.getItem("movies"));
-  //     const isthere = oldCache.find(e => e.id === el.id)
-  //     if(!isthere){
-  //     oldCache.push(el)
-  //     localStorage.setItem("movies", JSON.stringify(oldCache));
-  //     alert(`${el.title} added to your favorites`)
-  //     } else {
-  //       alert(`${el.title} is already in your favorites`)
+export default function Movie({movie, prefix, fav}) {
+  const addToFav = (el) => {
+    let movieCache = [];
+    if (!localStorage.getItem("movies")) {
+      console.log("no movie cached yet");
+      movieCache.push(el);
+      alert(`${el.title} added to your favorites`)
+      localStorage.setItem("movies", JSON.stringify(movieCache));
+    } else {
+      console.log("merge/update cached data");
+      let oldCache = JSON.parse(localStorage.getItem("movies"));
+      const isthere = oldCache.find(e => e.id === el.id)
+      if(!isthere){
+      oldCache.push(el)
+      localStorage.setItem("movies", JSON.stringify(oldCache));
+      alert(`${el.title} added to your favorites`)
+      } else {
+        alert(`${el.title} is already in your favorites`)
 
-  //     }
-  //   }
-  // };
-  // deleteFromfav = (el) => {
-  //   const fav = JSON.parse(localStorage.getItem('movies'));
-  //   const index = fav.findIndex(e => e.id === el.id)
-  //   const title = fav[index].title
-  //   console.log(index)
-  //   fav.splice(index, 1);
-  //   alert(title, 'successfully deleted');
-  //   localStorage.removeItem('movies');
-  //   localStorage.setItem('movies', JSON.stringify(fav));
-  // }
+      }
+    }
+  };
+ const deleteFromfav = (el) => {
+    const fav = JSON.parse(localStorage.getItem('movies'));
+    const index = fav.findIndex(e => e.id === el.id)
+    const title = fav[index].title
+    console.log(index)
+    fav.splice(index, 1);
+    alert(title, 'successfully deleted');
+    localStorage.removeItem('movies');
+    localStorage.setItem('movies', JSON.stringify(fav));
+  }
 
   // handleDetails = (el) => {
   //   this.setState(() => {
@@ -50,11 +50,12 @@ export default function Movie(props) {
       release_date,
       title,
       // vote_average,
-    } = props.movie;
-    const prefix = props.prefix;
+    } = movie;
+    
+    console.log(fav)
     return (
       <MovieWrapper className="card col-md-4 col-lg-2">
-        <Link to={`movie/${props.movie.id}`} detail={props.movie}>
+        <Link to={`movie/${movie.id}`} detail={movie}>
           <div className="">
             <img
               src={`${prefix}${poster_path}`}
@@ -71,18 +72,18 @@ export default function Movie(props) {
         <div className="bot">
           <p className="r-date text-muted">{release_date}</p>
 
-          {/* {!this.props.fav?          
+          {!fav?          
           <span
             className="fa fa-heart"
             title="add to favorites"
-            onClick={() => this.addToFav(this.props.movie)}
+            onClick={() => addToFav(movie)}
           ></span>:
           <span
             className="fa fa-trash"
             title="delete"
-            onClick={() => this.deleteFromfav(this.props.movie)}
+            onClick={() => deleteFromfav(movie)}
           ></span>
-          } */}
+          }
         </div>
       </MovieWrapper>
     );

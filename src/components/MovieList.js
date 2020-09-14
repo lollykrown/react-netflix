@@ -9,7 +9,7 @@ export default function MovieList(props) {
 
   const prefix = "https://image.tmdb.org/t/p/w500";
 
-  const [imgPrefix, setprefix] = useState(prefix)
+  const [isFav, setIsFav] = useState(false)
 
   useEffect(() =>{
     getMovies()
@@ -39,7 +39,8 @@ export default function MovieList(props) {
 
     if (props.cat === "favorites") {
         let cachedFav = JSON.parse(localStorage.getItem("movies"));
-        setMovies({ movies: cachedFav, isFav:true});
+        setMovies(cachedFav);
+        setIsFav(!isFav)
       }
 
     try {
@@ -84,8 +85,8 @@ export default function MovieList(props) {
                   test={"test"}
                   key={movie.id}
                   movie={movie}
-                  // fav={value.isFav}
-                  prefix={imgPrefix}
+                  fav={isFav}
+                  prefix={prefix}
                 />
               );
             })}

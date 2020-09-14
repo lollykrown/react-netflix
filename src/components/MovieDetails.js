@@ -24,12 +24,7 @@ export default function MovieDetails(props) {
   } = movie;
 
   const ratings = vote_average/2;
-  // moment().format();
-  console.log('dae',release_date)
-
-  const dat = moment(release_date).format('MMMM YYYY');
-  // const dat = new Date(release_date)
-  console.log('date',dat)
+  const date = moment(release_date).format('MMMM YYYY');
 
   useEffect(() => {
     getMovieById();
@@ -106,10 +101,10 @@ export default function MovieDetails(props) {
                   <small>120mins</small>
                 </p>
                 <p className="card-text">
-                  <small className="tt">{release_date}</small>
+                  <small className="mr-3">{date}</small>
+                  <span className="badge btn stars-no">{ratings}</span>
                 </p>
-                <span className="badge btn stars-no">{ratings}</span>
-                <span className="fa fa-heart" title="add to favorites"></span>:
+                <span className="fa fa-heart" title="add to favorites"></span>
                 <span className="fa fa-trash" title="delete"></span>
               </div>
               
@@ -119,7 +114,7 @@ export default function MovieDetails(props) {
                   {cast.map(c => {
                     if(c.profile_path){
                     return(
-                  <div className="">
+                  <div key={c.id} className="">
                     <div className="cast-span col-lg-2">
                       <img
                         className="cast-img"
@@ -136,7 +131,7 @@ export default function MovieDetails(props) {
                 </div>
                 <div className="trailer">
                   <p>Trailer</p>
-                  <div clclassNameass="trailer-div">
+                  <div className="trailer-div">
                     <span className="trailer-span">
                       {/* <iframe width="220px" height="140px"
                               src="sanitizer.bypassSecurityTrustResourceUrl('https://www.youtube.com/embed/' + v.key + '?autoplay=1&fs=1&iv_load_policy=3&showinfo=0&rel=0&cc_load_policy=0&start=0&end=0&origin=https://youtubeembedcode.com')"/>
@@ -153,7 +148,13 @@ export default function MovieDetails(props) {
   );
 }
 
-const MovieWrapper = styled.div
-`
-
+const MovieWrapper = styled.div`
+.fa-heart,
+.fa-trash {
+  color: var(--mainRed) !important;
+  transition: all 0.25s ease-in-out;
+}
+.fa-heart:hover, .fa-trash:hover {
+  font-size: 1.35rem;
+}
 `;
