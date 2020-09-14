@@ -3,43 +3,43 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 export default class Movie extends Component {
-  addToFav = (el) => {
-    let movieCache = [];
-    if (!localStorage.getItem("movies")) {
-      console.log("no movie cached yet");
-      movieCache.push(el);
-      alert(`${el.title} added to your favorites`)
-      localStorage.setItem("movies", JSON.stringify(movieCache));
-    } else {
-      console.log("merge/update cached data");
-      let oldCache = JSON.parse(localStorage.getItem("movies"));
-      const isthere = oldCache.find(e => e.id === el.id)
-      if(!isthere){
-      oldCache.push(el)
-      localStorage.setItem("movies", JSON.stringify(oldCache));
-      alert(`${el.title} added to your favorites`)
-      } else {
-        alert(`${el.title} is already in your favorites`)
+  // addToFav = (el) => {
+  //   let movieCache = [];
+  //   if (!localStorage.getItem("movies")) {
+  //     console.log("no movie cached yet");
+  //     movieCache.push(el);
+  //     alert(`${el.title} added to your favorites`)
+  //     localStorage.setItem("movies", JSON.stringify(movieCache));
+  //   } else {
+  //     console.log("merge/update cached data");
+  //     let oldCache = JSON.parse(localStorage.getItem("movies"));
+  //     const isthere = oldCache.find(e => e.id === el.id)
+  //     if(!isthere){
+  //     oldCache.push(el)
+  //     localStorage.setItem("movies", JSON.stringify(oldCache));
+  //     alert(`${el.title} added to your favorites`)
+  //     } else {
+  //       alert(`${el.title} is already in your favorites`)
 
-      }
-    }
-  };
-  deleteFromfav = (el) => {
-    const fav = JSON.parse(localStorage.getItem('movies'));
-    const index = fav.findIndex(e => e.id === el.id)
-    const title = fav[index].title
-    console.log(index)
-    fav.splice(index, 1);
-    alert(title, 'successfully deleted');
-    localStorage.removeItem('movies');
-    localStorage.setItem('movies', JSON.stringify(fav));
-  }
+  //     }
+  //   }
+  // };
+  // deleteFromfav = (el) => {
+  //   const fav = JSON.parse(localStorage.getItem('movies'));
+  //   const index = fav.findIndex(e => e.id === el.id)
+  //   const title = fav[index].title
+  //   console.log(index)
+  //   fav.splice(index, 1);
+  //   alert(title, 'successfully deleted');
+  //   localStorage.removeItem('movies');
+  //   localStorage.setItem('movies', JSON.stringify(fav));
+  // }
 
-  handleDetails = (el) => {
-    this.setState(() => {
-      return { movieDetails: el };
-    });
-  };
+  // handleDetails = (el) => {
+  //   this.setState(() => {
+  //     return { movieDetails: el };
+  //   });
+  // };
 
   render() {
     const {
@@ -52,10 +52,9 @@ export default class Movie extends Component {
       title,
       // vote_average,
     } = this.props.mo;
-    console.log('movie', this.props.mo)
+    console.log('movie', this.props)
 
     const prefix = this.props.prefix;
-    console.log(prefix)
     return (
       <MovieWrapper className="card col-md-4 col-lg-2">
         <Link to="/details" >
