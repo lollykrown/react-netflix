@@ -1,9 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import Movie from './Movie'
 import Loading from './Loading'
+import { MovieContext } from "../MovieContext";
 import axios from 'axios';
 
 export default function MovieList(props) {
+  // console.log('con',value)
+
   const [movies, setMovies] = useState([]);
   const [pageTitle, setPageTitle] = useState('')
 
@@ -48,6 +51,8 @@ export default function MovieList(props) {
     }
   };
 
+
+
   // const handleSearch = (e) => {
   //   this.setState(() => {
   //     return { searchString: e.target.value };
@@ -67,8 +72,9 @@ export default function MovieList(props) {
             {!movies? <Loading/> :          
             movies.map(movie => {
               return (
-                <Movie
+                <Movie 
                   // details={this.handleDetails}
+                  
                   key={movie.id}
                   movie={movie}
                   prefix={prefix}

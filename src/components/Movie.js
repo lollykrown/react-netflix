@@ -4,11 +4,22 @@ import styled from "styled-components";
 import { MovieContext } from "../MovieContext";
 
 export default function Movie({movie, prefix}) {
-  const value = useContext(MovieContext)
-  console.log('con',value)
-  // useEffect(() => {
-  //   checkIfFav(movie)
-  // }, [])
+  const [isFav, setIsFav] = useState(false)
+
+  const checkIfFav = (el) => {
+      const fav = JSON.parse(localStorage.getItem('movies'));
+      const movie = fav.find(e => e.id === el.id)
+      
+      if(movie){
+          console.log('set')
+        setIsFav(!isFav)
+      }
+    }
+
+    useEffect(() => {
+      checkIfFav(movie)
+    }, [])
+
   const addToFav = (el) => {
     let movieCache = [];
     if (!localStorage.getItem("movies")) {
@@ -49,7 +60,7 @@ export default function Movie({movie, prefix}) {
     
     return (
       <MovieWrapper className="card col-md-4 col-lg-2">
-        {/* <Link to={`movie/${movie.id}`} detail={movie}>
+        <Link to={`movie/${movie.id}`} detail={movie}>
           <div className="">
             <img
               src={`${prefix}${poster_path}`}
@@ -64,9 +75,9 @@ export default function Movie({movie, prefix}) {
           </div>
         </Link>
         <div className="bot">
-          <p className="r-date text-muted">{release_date}</p> */}
+          <p className="r-date text-muted">{release_date}</p>
 
-          {/* {!isFav?          
+          {!isFav?          
           <span
             className="fa fa-heart"
             title="add to favorites"
@@ -77,8 +88,8 @@ export default function Movie({movie, prefix}) {
             title="delete from favorites"
             onClick={() => deleteFromfav(movie)}
           ></span>
-          } */}
-        {/* </div> */}
+          }
+        </div>
       </MovieWrapper>
     );
 }
