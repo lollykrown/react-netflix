@@ -33,6 +33,7 @@ function Loading(props) {
 export default Loading;
 
 const Loader = styled.div`
+width:100%;
 /* loader css */
 #logo {
     position: absolute;

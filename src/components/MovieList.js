@@ -11,7 +11,7 @@ export default function MovieList(props) {
 
   const [isFav, setIsFav] = useState(false)
 
-  useEffect(() =>{
+  useEffect(() => {
     getMovies()
   }, [])
 
@@ -67,10 +67,7 @@ export default function MovieList(props) {
       <div className="container-fluid px-5">
         <h2 className="white mt-4">{pageTitle}</h2>
         <div className="row">
-            {/* {if(!movies){                     
-            return (<Loading/>)                            
-            } else { */}
-            {
+            {!movies? <Loading/> :          
             movies.map(movie => {
               return (
                 <Movie
