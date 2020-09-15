@@ -1,62 +1,38 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, useCallback } from "react";
 import styled from "styled-components";
 import axios from "axios";
 import moment from "moment";
 import Star from './Star'
+import Loading from './Loading'
+
 import { MovieContext } from "../MovieContext";
 
 export default function MovieDetails(props) {
-  const url = "https://api.themoviedb.org/3/movie/";
-  const apiKey = "0180207eb6ef9e35482bc3aa2a2b9672";
-  const lang = "en-US";
-  const prefix = "https://image.tmdb.org/t/p/w500";
+  const { prefix, url, apiKey, lang } = useContext(MovieContext)
 
   const [movie, setMovie] = useState({});
+  const [loading, setLoading] = useState(false)
 
-  useEffect(() => {
-    getMovieById();
-  },[]);
-
-  const [cast, setCast] = useState([]);
-
-  useEffect(() => {
-    getCast();
-  },[]);
-
-  const [trailers, setTrailers] = useState([]);
-
-  useEffect(() => {
-    getTrailers();
-  },[]);
-
-  const getMovieById = async () => {
+  const getMovieById = useCallback(() => {
     const detailsUrl = `${url}${props.match.params.id}?api_key=${apiKey}&language=${lang}`;
 
     console.log(detailsUrl);
 
     try {
-      const response = await axios.get(detailsUrl);
+      const response = axios.get(detailsUrl);
       console.log("movies", response.data);
       setMovie(response.data);
+      setLoading(false)
     } catch (error) {
       console.error(error);
     }
-  };
+  },[]);
+  useEffect(() => {
+    setLoading(true)
+    getMovieById();
+  },[]);
 
-  
-  const {
-    backdrop_path,
-    // genre_ids,
-    // id,
-    overview,
-    poster_path,
-    release_date,
-    title,
-    vote_average,
-  } = movie;
-
-  const ratings = vote_average / 2;
-  const date = moment(release_date).format("MMMM YYYY");
+  const [cast, setCast] = useState([]);
 
   const getCast = async () => {
     const castUrl = `${url}${props.match.params.id}/credits?api_key=${apiKey}`;
@@ -70,19 +46,45 @@ export default function MovieDetails(props) {
     }
   };
 
-  const getTrailers = async () => {
-    const trailersUrl = `${url}${props.match.params.id}$/videos?api_key=${apiKey}&language=${lang}`;
+  useEffect(() => {
+    getCast();
+  });
 
-    try {
-      const response = await axios.get(trailersUrl);
-      console.log("trailers", response.data.results);
-      setTrailers(response.data.results);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-  // genre_ids: (5) [28, 12, 18, 14, 10752]
-  // vote_average: 7.7
+  const [trailers, setTrailers] = useState([]);
+
+  useEffect(() => {
+    const getTrailers = async () => {
+      const trailersUrl = `${url}${props.match.params.id}$/videos?api_key=${apiKey}&language=${lang}`;
+  
+      try {
+        const response = await axios.get(trailersUrl);
+        console.log("trailers", response.data.results);
+        setTrailers(response.data.results);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    getTrailers();
+  });
+
+  if(loading) {
+    return <Loading />
+  }
+
+    // genre_ids: (5) [28, 12, 18, 14, 10752]
+
+  const {
+    backdrop_path,
+    // genre_ids,
+    overview,
+    poster_path,
+    release_date,
+    title,
+    vote_average,
+  } = movie;
+
+  const ratings = vote_average / 2;
+  const date = moment(release_date).format("MMMM YYYY");
 
   return (
     <MovieWrapper>

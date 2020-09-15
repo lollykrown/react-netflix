@@ -16,7 +16,7 @@ function Navbar(){
         return m.title.toLowerCase().includes(search.toLowerCase())
       })
     )
-  }, [search, movies, setFilteredMovies])
+  }, [search, movies])
 
     return (
       <NavWrapper className="navbar navbar-expand-sm bg-default navbar-dark px-sm-5">
