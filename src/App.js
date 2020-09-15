@@ -5,7 +5,6 @@ import 'popper.js/dist/umd/popper.min.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'jquery/dist/jquery.min.js';
 import 'bootstrap/dist/js/bootstrap.min.js';
-import Navbar from './components/Navbar';
 import Home from './components/Home';
 import Footer from './components/Footer';
 import Default from './components/Default';
@@ -16,7 +15,6 @@ import Loading from './components/Loading';
 function App() {
   return (
     <React.Fragment>
-    <Navbar/>
     <Switch>
       <Route exact path="/" component={Home} />
       <Route exact path="/popular" component={() => <MovieList cat={"popular"} />} /> 

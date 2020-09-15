@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useContext } from 'react';
 import Movie from './Movie'
 import Loading from './Loading'
+import Navbar from './Navbar'
+
 import { MovieContext } from "../MovieContext";
 
 import axios from 'axios';
@@ -55,20 +57,10 @@ export default function MovieList(props) {
     }
   };
 
-
-
-  // const handleSearch = (e) => {
-  //   this.setState(() => {
-  //     return { searchString: e.target.value };
-  //   });
-  // }
-
-  // const filter = () => {
-  //   this.state.movies.map(movie => {
-  //     return movie.title === this.state.searchString
-  //   })
-  // }
     return (
+      <React.Fragment>
+      <Navbar movies={movies}/>
+
       <div className="container-fluid pl-5">
         <h2 className="white mt-4">{pageTitle}</h2>
         <div className="row">
@@ -85,6 +77,7 @@ export default function MovieList(props) {
             })}
         </div>
       </div>
+      </React.Fragment>
     );
 }
 

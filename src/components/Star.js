@@ -6,11 +6,11 @@ export default function Star({ rating }) {
   console.log(rat);
   return (
     <StarContainer className="crop" width={rating} title={rating}>
-      <span class="fa fa-star"></span>
-      <span class="fa fa-star"></span>
-      <span class="fa fa-star"></span>
-      <span class="fa fa-star"></span>
-      <span class="fa fa-star"></span>
+      <span className="fa fa-star"></span>
+      <span className="fa fa-star"></span>
+      <span className="fa fa-star"></span>
+      <span className="fa fa-star"></span>
+      <span className="fa fa-star"></span>
     </StarContainer>
   );
 }

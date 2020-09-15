@@ -1,8 +1,27 @@
-import React from "react";
+import React, { useState, useEffect, createContext } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-function Navbar(){
+function Navbar({movies}){
+  const [searchString, setSearchString] = useState(false)
+  
+  const filter = (e, movies, title) => {
+    e.preventDefault()
+    movies.map(movie => {
+      return movie.title === title
+    })
+  }
+
+  const handleSearch = (e) => {
+    setSearchString(e.target.value);
+    // filter(movies, searchString)
+  }
+
+  // useEffect(() => {
+  //   filter(movies, searchString)
+  // }, [searchString])
+  console.log(searchString)
+
     return (
       <NavWrapper className="navbar navbar-expand-sm bg-default navbar-dark px-sm-5">
       <Link className="navbar-brand" to="/">Mini-<span className="bran">Netflix</span></Link>
@@ -44,12 +63,13 @@ function Navbar(){
         </ul>
         <form className="form-inline ml-auto my-lg-0">
           <input
+          onChange={handleSearch}
             className="form-control "
             type="search"
             placeholder="&#128269; Search Movies"
             aria-label="Search"
           />
-            <button type="button" className="btn btn-default">Submit</button>
+            <button onClick={()=>filter(movies, searchString)}type="button" className="btn btn-default">Submit</button>
         </form>
         <ul className="navbar-nav align-items-center ml-auto">
         <li className="nav-item ml-4">

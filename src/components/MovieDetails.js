@@ -3,6 +3,7 @@ import styled from "styled-components";
 import axios from "axios";
 import moment from "moment";
 import Star from './Star'
+import { MovieContext } from "../MovieContext";
 
 export default function MovieDetails(props) {
   const url = "https://api.themoviedb.org/3/movie/";
@@ -11,22 +12,7 @@ export default function MovieDetails(props) {
   const prefix = "https://image.tmdb.org/t/p/w500";
 
   const [movie, setMovie] = useState({});
-
-  console.log('details', props)
-
-  const {
-    backdrop_path,
-    // genre_ids,
-    // id,
-    overview,
-    poster_path,
-    release_date,
-    title,
-    vote_average,
-  } = movie;
-
-  const ratings = vote_average / 2;
-  const date = moment(release_date).format("MMMM YYYY");
+  const [movies, setMovies] = useContext(MovieContext);
 
   useEffect(() => {
     getMovieById();
@@ -57,6 +43,31 @@ export default function MovieDetails(props) {
       console.error(error);
     }
   };
+
+  
+  const {
+    backdrop_path,
+    // genre_ids,
+    // id,
+    overview,
+    poster_path,
+    release_date,
+    title,
+    vote_average,
+  } = movie;
+
+  const ratings = vote_average / 2;
+  const date = moment(release_date).format("MMMM YYYY");
+
+  // const getMovie = (mov, id) => {
+  //   const mo = mov.find(el => el.id === id)
+  //   console.log('mmoo', mo)
+  //   setMovie(mo)
+  // }
+
+  //   useEffect(() => {
+  //   getMovie(movies, props.match.params.id);
+  // },[]);
 
   const getCast = async () => {
     const castUrl = `${url}${props.match.params.id}/credits?api_key=${apiKey}`;
@@ -157,6 +168,7 @@ export default function MovieDetails(props) {
                     <div>
                       <span className="trailer-span">
                         <iframe
+                          key={movie.id}
                           title={movie.title}
                           width="350px"
                           height="200px"

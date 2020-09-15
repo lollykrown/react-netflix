@@ -55,7 +55,7 @@ export default function Movie({ movie, prefix }) {
 
   return (
     <MovieWrapper className="card col-md-4 col-lg-2">
-      <Link to={`movie/${movie.id}`} detail={movie}>
+      <Link to={`movie/${movie.id}`}>
         <div className="">
           <img
             src={`${prefix}${poster_path}`}
