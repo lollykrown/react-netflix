@@ -4,16 +4,15 @@ import styled from "styled-components";
 import { MovieContext } from "../MovieContext";
 
 export default function Movie({movie, prefix}) {
-  const [isFav, setIsFav] = useState(false)
+  const [isFav, setIsFav] = useState()
 
   const checkIfFav = (el) => {
       const fav = JSON.parse(localStorage.getItem('movies'));
-      const movie = fav.find(e => e.id === el.id)
-      
-      if(movie){
-          console.log('set')
-        setIsFav(!isFav)
-      }
+      const moviee = fav.find(e => e.id === el.id)
+      moviee && setIsFav(!isFav)
+      // if(movie){
+      //   setIsFav(!isFav)
+      // }
     }
 
     useEffect(() => {
