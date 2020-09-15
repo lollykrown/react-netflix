@@ -59,16 +59,6 @@ export default function MovieDetails(props) {
   const ratings = vote_average / 2;
   const date = moment(release_date).format("MMMM YYYY");
 
-  // const getMovie = (mov, id) => {
-  //   const mo = mov.find(el => el.id === id)
-  //   console.log('mmoo', mo)
-  //   setMovie(mo)
-  // }
-
-  //   useEffect(() => {
-  //   getMovie(movies, props.match.params.id);
-  // },[]);
-
   const getCast = async () => {
     const castUrl = `${url}${props.match.params.id}/credits?api_key=${apiKey}`;
 

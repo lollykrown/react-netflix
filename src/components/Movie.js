@@ -3,11 +3,11 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { MovieContext } from "../MovieContext";
 
-export default function Movie({ movie, prefix }) {
-  const [isFav, setIsFav] = useState(false);
-  
-  const { moviesList } = useContext(MovieContext)
-  const [movies, setMovies] = moviesList
+export default function Movie({ movie }) {
+  const { fav } = useContext(MovieContext)
+  const [isFav, setIsFav] = useState(false)
+
+  const { prefix } = useContext(MovieContext)
 
   const checkIfFav = (id) => {
     const fav = JSON.parse(localStorage.getItem("movies"));

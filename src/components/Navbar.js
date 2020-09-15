@@ -5,18 +5,10 @@ import { MovieContext } from "../MovieContext";
 
 function Navbar(){
   const { moviesList, filteredMovies } = useContext(MovieContext)
-  const [movies, setMovies] = moviesList
+  const [movies] = moviesList
   const [filtered, setFilteredMovies] = filteredMovies;
 
   const [search, setSearch] = useState('')
-
-
-  // console.log('navbar', movies)
-
-  // useEffect(() => {
-  //   filter(movies, searchString)
-  // }, [searchString])
-
   
   useEffect(() => {
     setFilteredMovies(

@@ -11,27 +11,15 @@ export default function MovieList(props) {
 
   const { moviesList, filteredMovies } = useContext(MovieContext)
   const [movies, setMovies] = moviesList
-  const [filtered, setFilteredMovies] = filteredMovies
+  const [filtered] = filteredMovies
  
   const [pageTitle, setPageTitle] = useState('')
-  const [search, setSearch] = useState('')
   const [loading, setLoading] = useState(false)
-
-
-  const prefix = "https://image.tmdb.org/t/p/w500";  
   
   useEffect(() => {
     setLoading(true)
     getMovies()
   }, [])
-
-  // useEffect(() => {
-  //   setFilteredMovies(
-  //     movies.filter( m => {
-  //       return m.title.toLowerCase().includes(search.toLowerCase())
-  //     })
-  //   )
-  // }, [search, movies])
 
   const getMovies = async () => {
     const url = "https://api.themoviedb.org/3/movie/";
@@ -79,7 +67,6 @@ export default function MovieList(props) {
       <Navbar mov={movies}/>
 
       <div className="container-fluid pl-5">
-        <input type="text" placeholder="search" onChange={e=> setSearch(e.target.value)}/>
         <h2 className="white mt-4">{pageTitle}</h2>
         <div className="row">
             {filtered.map(movie => {
@@ -88,7 +75,6 @@ export default function MovieList(props) {
                   // details={this.handleDetails}                  
                   key={movie.id}
                   movie={movie}
-                  prefix={prefix}
                 />
               );
             })}
