@@ -24,7 +24,7 @@ function App() {
       <Route exact path="/now playing" component={() => <MovieList cat={"now"} />} />
       <Route exact path="/favorites" component={() => <MovieList cat={"favorites"} />} />  
       <Route exact path="/movie/:id" component={MovieDetails} />   
-      <Route exact path="/loading" component={Loading} />                                     
+      <Route component={Loading} />                                     
       <Route component={Default} />
     </Switch>
     <Footer />

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Movie from './Movie'
+import Loading from './Loading'
 import axios from 'axios';
 
 export default function MovieList(props) {
@@ -66,17 +67,14 @@ export default function MovieList(props) {
       <div className="container-fluid px-5">
         <h2 className="white mt-4">{pageTitle}</h2>
         <div className="row">
-        {/* <MovieConsumer>
-            {value => {
-              console.log('ml',value.movies)
-            if(value.movies.length > 0 ){  */}
-            {movies.map(movie => {
-              // console.log('there\'s data', movie)
+            {/* {if(!movies){                     
+            return (<Loading/>)                            
+            } else { */}
+            {
+            movies.map(movie => {
               return (
-                // <h1 className="text-danger"> {m}</h1>
                 <Movie
                   // details={this.handleDetails}
-                  test={"test"}
                   key={movie.id}
                   movie={movie}
                   fav={isFav}
@@ -84,14 +82,6 @@ export default function MovieList(props) {
                 />
               );
             })}
-            {/* }else{
-              console.log('empty')
-              return (<h1>Loading</h1>);
-
-        }
-        
-          }}
-          </MovieConsumer> */}
         </div>
       </div>
     );
