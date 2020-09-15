@@ -5,7 +5,9 @@ import { MovieContext } from "../MovieContext";
 
 export default function Movie({ movie, prefix }) {
   const [isFav, setIsFav] = useState(false);
-  const [movies, setMovies] = useContext(MovieContext);
+  
+  const { moviesList } = useContext(MovieContext)
+  const [movies, setMovies] = moviesList
 
   const checkIfFav = (id) => {
     const fav = JSON.parse(localStorage.getItem("movies"));

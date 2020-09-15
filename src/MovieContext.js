@@ -6,18 +6,13 @@ export const MovieProvider = (props) => {
     const [isFav, setIsFav] = useState(false)
     const [movies, setMovies] = useState([]);
     const [home, setHome] = useState([]);
+    const [filtered, setFilteredMovies] = useState([])
 
-    const store = {
-        fav: [isFav, setIsFav],
-        moviesStore: [movies, setMovies],
-        parent: [home, setHome],
-      }
-
-    console.log('context', movies)
     return (
-        <MovieContext.Provider value={
-            [movies, setMovies]
-        }>
+        <MovieContext.Provider value={{
+            moviesList: [movies, setMovies],
+            filteredMovies: [filtered, setFilteredMovies]
+        }}>
             {props.children}
         </MovieContext.Provider>
     )

@@ -1,26 +1,30 @@
-import React, { useState, useEffect, createContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { MovieContext } from "../MovieContext";
 
-function Navbar({movies}){
-  const [searchString, setSearchString] = useState(false)
-  
-  const filter = (e, movies, title) => {
-    e.preventDefault()
-    movies.map(movie => {
-      return movie.title === title
-    })
-  }
+function Navbar(){
+  const { moviesList, filteredMovies } = useContext(MovieContext)
+  const [movies, setMovies] = moviesList
+  const [filtered, setFilteredMovies] = filteredMovies;
 
-  const handleSearch = (e) => {
-    setSearchString(e.target.value);
-    // filter(movies, searchString)
-  }
+  const [search, setSearch] = useState('')
+
+
+  // console.log('navbar', movies)
 
   // useEffect(() => {
   //   filter(movies, searchString)
   // }, [searchString])
-  console.log(searchString)
+
+  
+  useEffect(() => {
+    setFilteredMovies(
+      movies.filter( m => {
+        return m.title.toLowerCase().includes(search.toLowerCase())
+      })
+    )
+  }, [search, movies])
 
     return (
       <NavWrapper className="navbar navbar-expand-sm bg-default navbar-dark px-sm-5">
@@ -63,13 +67,13 @@ function Navbar({movies}){
         </ul>
         <form className="form-inline ml-auto my-lg-0">
           <input
-          onChange={handleSearch}
+            onChange={e=> setSearch(e.target.value)}
             className="form-control "
             type="search"
             placeholder="&#128269; Search Movies"
             aria-label="Search"
           />
-            <button onClick={()=>filter(movies, searchString)}type="button" className="btn btn-default">Submit</button>
+            <button type="button" className="btn btn-default">Submit</button>
         </form>
         <ul className="navbar-nav align-items-center ml-auto">
         <li className="nav-item ml-4">
