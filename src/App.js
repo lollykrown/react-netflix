@@ -12,6 +12,7 @@ import Default from './components/Default';
 import MovieList from './components/MovieList';
 import MovieDetails from './components/MovieDetails';
 import Loading from './components/Loading';
+import { MovieProvider } from "./context";
 
 function App() {
   return (
