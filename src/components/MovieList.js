@@ -9,7 +9,7 @@ import axios from 'axios';
 
 export default function MovieList(props) {
 
-  const { moviesList, filteredMovies } = useContext(MovieContext)
+  const { moviesList, filteredMovies, url, apiKey, lang } = useContext(MovieContext)
   const [movies, setMovies] = moviesList
   const [filtered] = filteredMovies
  
@@ -22,12 +22,9 @@ export default function MovieList(props) {
   }, [])
 
   const getMovies = async () => {
-    const url = "https://api.themoviedb.org/3/movie/";
     // const movieslistUrl =
     //   "https://api.themoviedb.org/4/list/?page=1&api_key=0180207eb6ef9e35482bc3aa2a2b9672";
     // const searchUrl = "https://api.themoviedb.org/3/search/movie";
-    const apiKey = "0180207eb6ef9e35482bc3aa2a2b9672";
-    const lang = "en-US";
 
     let tit;
     if (props.cat === "popular") {
@@ -45,7 +42,6 @@ export default function MovieList(props) {
 
     if (props.cat === "favorites") {
         let cachedFav = JSON.parse(localStorage.getItem("movies"));
-        // setFavMovies(prev => [...prev, cachedFav]);
         setMovies(cachedFav)
         setLoading(false)
       }
@@ -53,14 +49,15 @@ export default function MovieList(props) {
     try {
       const response = await axios.get(movieUrl);
       setMovies(response.data.results);
+      setLoading(false)
     } catch (error) {
       console.error(error);
     }
   };
 
-  // if(loading) {
-  //   return <Loading />
-  // }
+  if(loading) {
+    return <Loading />
+  }
 
     return (
       <React.Fragment>
@@ -72,7 +69,6 @@ export default function MovieList(props) {
             {filtered.map(movie => {
               return (
                 <Movie 
-                  // details={this.handleDetails}                  
                   key={movie.id}
                   movie={movie}
                 />

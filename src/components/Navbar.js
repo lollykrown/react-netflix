@@ -24,11 +24,11 @@ function Navbar(){
       <button
         className="navbar-toggler"
         type="button"
-        data-toggle="collapse"
-        data-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
+        dataToggle="collapse"
+        dataTarget="#navbarSupportedContent"
+        ariaControls="navbarSupportedContent"
+        ariaAxpanded="false"
+        ariaLabel="Toggle navigation"
       >
         <span className="navbar-toggler-icon"></span>
       </button>
@@ -63,7 +63,7 @@ function Navbar(){
             className="form-control "
             type="search"
             placeholder="&#128269; Search Movies"
-            aria-label="Search"
+            ariaLabel="Search"
           />
             <button type="button" className="btn btn-default">Submit</button>
         </form>

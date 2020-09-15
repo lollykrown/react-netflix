@@ -4,7 +4,6 @@ import styled from "styled-components";
 import { MovieContext } from "../MovieContext";
 
 export default function Movie({ movie }) {
-  const { fav } = useContext(MovieContext)
   const [isFav, setIsFav] = useState(false)
 
   const { prefix } = useContext(MovieContext)
@@ -102,7 +101,7 @@ const MovieWrapper = styled.div`
   .fa-trash {
     float: right;
     color: var(--mainRed);
-    transition: all 0.25s ease-in-out;
+    transition: all 0.5s ease-in-out;
   }
   .fa-heart:hover,
   .fa-trash:hover {

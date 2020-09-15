@@ -3,18 +3,18 @@ import styled from "styled-components";
 import axios from "axios";
 import moment from "moment";
 import Star from './Star'
+import Loading from './Loading'
+
 import { MovieContext } from "../MovieContext";
 
 export default function MovieDetails(props) {
-  const url = "https://api.themoviedb.org/3/movie/";
-  const apiKey = "0180207eb6ef9e35482bc3aa2a2b9672";
-  const lang = "en-US";
-  const prefix = "https://image.tmdb.org/t/p/w500";
+  const { prefix, url, apiKey, lang } = useContext(MovieContext)
 
   const [movie, setMovie] = useState({});
-  const [movies, setMovies] = useContext(MovieContext);
+  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
+    setLoading(true)
     getMovieById();
   },[]);
 
@@ -30,6 +30,10 @@ export default function MovieDetails(props) {
     getTrailers();
   },[]);
 
+  if(loading) {
+    return <Loading />
+  }
+
   const getMovieById = async () => {
     const detailsUrl = `${url}${props.match.params.id}?api_key=${apiKey}&language=${lang}`;
 
@@ -39,16 +43,17 @@ export default function MovieDetails(props) {
       const response = await axios.get(detailsUrl);
       console.log("movies", response.data);
       setMovie(response.data);
+      setLoading(false)
     } catch (error) {
       console.error(error);
     }
   };
 
-  
+    // genre_ids: (5) [28, 12, 18, 14, 10752]
+
   const {
     backdrop_path,
     // genre_ids,
-    // id,
     overview,
     poster_path,
     release_date,
@@ -82,8 +87,6 @@ export default function MovieDetails(props) {
       console.error(error);
     }
   };
-  // genre_ids: (5) [28, 12, 18, 14, 10752]
-  // vote_average: 7.7
 
   return (
     <MovieWrapper>
