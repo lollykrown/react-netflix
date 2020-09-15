@@ -1,27 +1,29 @@
+import React from "react";
 import styled from "styled-components";
 
-export function Star(){
-
-    // this.starWidth = this.rating * 75 / 5;
-
-    return(
-        <StarContainer class="crop"
-        // [style.width.px]="starWidth"
-        // [title]="rating"
-        // (click)="onClick()"
-        >
-            <div style="width: 75px">
-                <span class="fa fa-star"></span>
-                <span class="fa fa-star"></span>
-                <span class="fa fa-star"></span>
-                <span class="fa fa-star"></span>
-                <span class="fa fa-star"></span>
-            </div>
-        </StarContainer>
-    )
+export default function Star({ rating }) {
+  const rat = (rating * 75) / 5;
+  console.log(rat);
+  return (
+    <StarContainer className="crop" width={rating} title={rating}>
+      <span class="fa fa-star"></span>
+      <span class="fa fa-star"></span>
+      <span class="fa fa-star"></span>
+      <span class="fa fa-star"></span>
+      <span class="fa fa-star"></span>
+    </StarContainer>
+  );
 }
 
 const StarContainer = styled.button`
-.crop {overflow: hidden;}
-div {cursor: pointer;}'
+  cursor: pointer;
+  border: none !important;
+  margin-left: 0.5rem;
+  background-color: transparent;
+  .crop {
+    overflow: hidden;
+  }
+  .fa-star {
+    color: var(--mainRed);
+  }
 `;

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import axios from "axios";
 import moment from "moment";
+import Star from './Star'
 
 export default function MovieDetails(props) {
   const url = "https://api.themoviedb.org/3/movie/";
@@ -114,6 +115,7 @@ export default function MovieDetails(props) {
                 <p className="card-text mt-3">
                   <small className="mr-3">{date}</small>
                   <span className="badge btn stars-no">{ratings}</span>
+                  <Star rating={ratings}/>
                 </p>
                 <span className="fa fa-heart" title="add to favorites"></span>
                 <span className="fa fa-trash" title="delete"></span>
@@ -151,14 +153,6 @@ export default function MovieDetails(props) {
                 if (t.key) {
                   return (
                     <div>
-                      <span className="trailer-span">
-                        <iframe
-                          title={movie.title}
-                          width="350px"
-                          height="200px"
-                          src={`https://www.youtube.com/embed/${t.key}?autoplay=1&fs=1&iv_load_policy=3&showinfo=0&rel=0&cc_load_policy=0&start=0&end=0&origin=https://youtubeembedcode.com`}
-                        ></iframe>
-                      </span>
                       <span className="trailer-span">
                         <iframe
                           title={movie.title}

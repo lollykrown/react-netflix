@@ -1,8 +1,15 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 export default function Movie({movie, prefix, fav}) {
+
+  const [isFav, setIsFav] = useState(false)
+
+  useEffect(() => {
+    checkIfFav(movie)
+  }, [])
+
   const addToFav = (el) => {
     let movieCache = [];
     if (!localStorage.getItem("movies")) {
@@ -35,6 +42,16 @@ export default function Movie({movie, prefix, fav}) {
     localStorage.setItem('movies', JSON.stringify(fav));
   }
 
+  const checkIfFav = (el) => {
+    const fav = JSON.parse(localStorage.getItem('movies'));
+    const movie = fav.find(e => e.id === el.id)
+    console.log(movie)
+    if(movie){
+      setIsFav(!isFav)
+    }
+
+  }
+
   // handleDetails = (el) => {
   //   this.setState(() => {
   //     return { movieDetails: el };
@@ -42,14 +59,9 @@ export default function Movie({movie, prefix, fav}) {
   // };
 
     const {
-      // backdrop_path,
-      // genre_ids,
-      // id,
-      // overview,
       poster_path,
       release_date,
       title,
-      // vote_average,
     } = movie;
     
     console.log(fav)
@@ -72,7 +84,7 @@ export default function Movie({movie, prefix, fav}) {
         <div className="bot">
           <p className="r-date text-muted">{release_date}</p>
 
-          {!fav?          
+          {!isFav?          
           <span
             className="fa fa-heart"
             title="add to favorites"
@@ -80,7 +92,7 @@ export default function Movie({movie, prefix, fav}) {
           ></span>:
           <span
             className="fa fa-trash"
-            title="delete"
+            title="delete from favorites"
             onClick={() => deleteFromfav(movie)}
           ></span>
           }
