@@ -6,7 +6,7 @@ import { MovieContext } from "../MovieContext";
 function Navbar(){
   const { moviesList, filteredMovies } = useContext(MovieContext)
   const [movies] = moviesList
-  const [filtered, setFilteredMovies] = filteredMovies;
+  const [, setFilteredMovies] = filteredMovies;
 
   const [search, setSearch] = useState('')
   
@@ -16,7 +16,7 @@ function Navbar(){
         return m.title.toLowerCase().includes(search.toLowerCase())
       })
     )
-  }, [search, movies])
+  }, [search, movies, setFilteredMovies])
 
     return (
       <NavWrapper className="navbar navbar-expand-sm bg-default navbar-dark px-sm-5">
@@ -24,11 +24,11 @@ function Navbar(){
       <button
         className="navbar-toggler"
         type="button"
-        dataToggle="collapse"
-        dataTarget="#navbarSupportedContent"
-        ariaControls="navbarSupportedContent"
-        ariaAxpanded="false"
-        ariaLabel="Toggle navigation"
+        data-toggle="collapse"
+        data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
       >
         <span className="navbar-toggler-icon"></span>
       </button>
@@ -63,7 +63,7 @@ function Navbar(){
             className="form-control "
             type="search"
             placeholder="&#128269; Search Movies"
-            ariaLabel="Search"
+            aria-label="Search"
           />
             <button type="button" className="btn btn-default">Submit</button>
         </form>

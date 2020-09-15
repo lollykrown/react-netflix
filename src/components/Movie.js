@@ -3,92 +3,92 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { MovieContext } from "../MovieContext";
 
-export default function Movie({ movie }) {
+export default function Movie({movie, prefix}) {
   const [isFav, setIsFav] = useState(false)
-
-  const { prefix } = useContext(MovieContext)
+  // const value = useContext(MovieContext)
 
   const checkIfFav = (id) => {
-    const fav = JSON.parse(localStorage.getItem("movies"));
-    const moviee = fav.find((e) => e.id === id);
-    moviee && setIsFav(!isFav);
-  };
+      const fav = JSON.parse(localStorage.getItem('movies'));
+      const moviee = fav.find(e => e.id === id)
+      moviee && setIsFav(!isFav)
+    }
 
-  useEffect(() => {
-    checkIfFav(movie.id);
-  }, []);
+    useEffect(() => {
+      checkIfFav(movie.id)
+    }, [])
 
   const addToFav = (el) => {
     let movieCache = [];
     if (!localStorage.getItem("movies")) {
       console.log("no movie cached yet");
       movieCache.push(el);
-      alert(`${el.title} added to your favorites`);
+      alert(`${el.title} added to your favorites`)
       localStorage.setItem("movies", JSON.stringify(movieCache));
     } else {
       console.log("merge/update cached data");
       let oldCache = JSON.parse(localStorage.getItem("movies"));
-      const isthere = oldCache.find((e) => e.id === el.id);
-      if (!isthere) {
-        oldCache.push(el);
-        localStorage.setItem("movies", JSON.stringify(oldCache));
-        setIsFav(!isFav)
-        alert(`${el.title} added to your favorites`);
+      const isthere = oldCache.find(e => e.id === el.id)
+      if(!isthere){
+      oldCache.push(el)
+      localStorage.setItem("movies", JSON.stringify(oldCache));
+      alert(`${el.title} added to your favorites`)
       } else {
-        alert(`${el.title} is already in your favorites`);
+        alert(`${el.title} is already in your favorites`)
+
       }
     }
   };
-
-  const deleteFromfav = (el) => {
-    const fav = JSON.parse(localStorage.getItem("movies"));
-    const index = fav.findIndex((e) => e.id === el.id);
-    const title = fav[index].title;
-    console.log(index);
+ const deleteFromfav = (el) => {
+    const fav = JSON.parse(localStorage.getItem('movies'));
+    const index = fav.findIndex(e => e.id === el.id)
+    const title = fav[index].title
+    console.log(index)
     fav.splice(index, 1);
-    alert(title, "successfully deleted");
-    localStorage.removeItem("movies");
-    localStorage.setItem("movies", JSON.stringify(fav));
-    setIsFav(!isFav)
-  };
+    alert(title, 'successfully deleted');
+    localStorage.removeItem('movies');
+    localStorage.setItem('movies', JSON.stringify(fav));
+  }
 
-  const { poster_path, release_date, title } = movie;
-
-  return (
-    <MovieWrapper className="card col-md-4 col-lg-2">
-      <Link to={`movie/${movie.id}`}>
-        <div className="">
-          <img
-            src={`${prefix}${poster_path}`}
-            className="card-img img-fluid"
-            alt="poster"
-          />
-          <div className="card-body p-0 mb-0">
-            <div className="title my-1" title={title}>
-              {title}
+    const {
+      poster_path,
+      release_date,
+      title,
+    } = movie;
+    
+    return (
+      <MovieWrapper className="card col-md-4 col-lg-2">
+        <Link to={`movie/${movie.id}`} detail={movie}>
+          <div className="">
+            <img
+              src={`${prefix}${poster_path}`}
+              className="card-img img-fluid"
+              alt="poster"
+            />
+            <div className="card-body p-0 mb-0">
+              <div className="title my-1" title={title}>
+                {title}
+              </div>
             </div>
           </div>
-        </div>
-      </Link>
-      <div className="bot">
-        <p className="r-date text-muted">{release_date}</p>
+        </Link>
+        <div className="bot">
+          <p className="r-date text-muted">{release_date}</p>
 
-        {!isFav ? (
+          {!isFav?          
           <span
             className="fa fa-heart"
             title="add to favorites"
             onClick={() => addToFav(movie)}
-          ></span>
-        ) : (
+          ></span>:
           <span
             className="fa fa-trash"
             title="delete from favorites"
             onClick={() => deleteFromfav(movie)}
           ></span>
-        )}
-      </div>
-    </MovieWrapper>
-  );
+          }
+        </div>
+      </MovieWrapper>
+    );
 }
 
 const MovieWrapper = styled.div`
@@ -101,10 +101,9 @@ const MovieWrapper = styled.div`
   .fa-trash {
     float: right;
     color: var(--mainRed);
-    transition: all 0.5s ease-in-out;
+    transition: all 0.25s ease-in-out;
   }
-  .fa-heart:hover,
-  .fa-trash:hover {
+  .fa-heart:hover, .fa-trash:hover {
     font-size: 1.35rem;
   }
   .card-image {
