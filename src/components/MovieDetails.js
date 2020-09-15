@@ -11,24 +11,23 @@ export default function MovieDetails(props) {
   const { prefix, url, apiKey, lang } = useContext(MovieContext)
 
   const [movie, setMovie] = useState({});
-  const [loading, setLoading] = useState(false)
+  // const [loading, setLoading] = useState(false)
 
-  const getMovieById = useCallback(() => {
+  const getMovieById = async () => {
     const detailsUrl = `${url}${props.match.params.id}?api_key=${apiKey}&language=${lang}`;
 
     console.log(detailsUrl);
 
     try {
-      const response = axios.get(detailsUrl);
-      console.log("movies", response.data);
+      const response = await axios.get(detailsUrl);
       setMovie(response.data);
-      setLoading(false)
+      // setLoading(false)
     } catch (error) {
       console.error(error);
     }
-  },[]);
+  };
   useEffect(() => {
-    setLoading(true)
+    // setLoading(true)
     getMovieById();
   },[]);
 
@@ -39,7 +38,6 @@ export default function MovieDetails(props) {
 
     try {
       const response = await axios.get(castUrl);
-      console.log("cast", response.data);
       setCast(response.data.cast);
     } catch (error) {
       console.error(error);
@@ -58,7 +56,6 @@ export default function MovieDetails(props) {
   
       try {
         const response = await axios.get(trailersUrl);
-        console.log("trailers", response.data.results);
         setTrailers(response.data.results);
       } catch (error) {
         console.error(error);
@@ -67,9 +64,9 @@ export default function MovieDetails(props) {
     getTrailers();
   });
 
-  if(loading) {
-    return <Loading />
-  }
+  // if(loading) {
+  //   return <Loading />
+  // }
 
     // genre_ids: (5) [28, 12, 18, 14, 10752]
 
@@ -156,10 +153,9 @@ export default function MovieDetails(props) {
               {trailers.map(t => {
                 if (t.key) {
                   return (
-                    <div>
+                    <div key={movie.id}>
                       <span className="trailer-span">
                         <iframe
-                          key={movie.id}
                           title={movie.title}
                           width="350px"
                           height="200px"
