@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import styled from "styled-components";
 import axios from "axios";
 import moment from "moment";
@@ -11,6 +11,8 @@ export default function MovieDetails(props) {
   const prefix = "https://image.tmdb.org/t/p/w500";
 
   const [movie, setMovie] = useState({});
+
+  console.log('details', props)
 
   const {
     backdrop_path,

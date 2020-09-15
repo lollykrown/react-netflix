@@ -4,20 +4,21 @@ export const MovieContext = createContext();
 
 export const MovieProvider = (props) => {
     const [isFav, setIsFav] = useState(false)
+    const [movies, setMovies] = useState([]);
 
-    const checkIfFav = (el) => {
-        const fav = JSON.parse(localStorage.getItem('movies'));
-        const movie = fav.find(e => e.id === el.id)
+    // const checkIfFav = (el) => {
+    //     const fav = JSON.parse(localStorage.getItem('movies'));
+    //     const movie = fav.find(e => e.id === el.id)
         
-        if(movie){
-            console.log('set')
-          setIsFav(!isFav)
-        }
-      }
-
+    //     if(movie){
+    //         console.log('set')
+    //       setIsFav(!isFav)
+    //     }
+    //   }
+    console.log('context', movies)
     return (
         <MovieContext.Provider value={
-            [isFav, setIsFav]
+            [movies, setMovies]
         }>
             {props.children}
         </MovieContext.Provider>

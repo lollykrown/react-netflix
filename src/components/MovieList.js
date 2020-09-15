@@ -2,16 +2,19 @@ import React, { useState, useEffect, useContext } from 'react';
 import Movie from './Movie'
 import Loading from './Loading'
 import { MovieContext } from "../MovieContext";
+
 import axios from 'axios';
 
 export default function MovieList(props) {
-  // console.log('con',value)
 
-  const [movies, setMovies] = useState([]);
+  const [movies, setMovies] = useContext(MovieContext)
+
   const [pageTitle, setPageTitle] = useState('')
 
   const prefix = "https://image.tmdb.org/t/p/w500";
-
+  
+ 
+  
   useEffect(() => {
     getMovies()
   }, [])
@@ -35,12 +38,13 @@ export default function MovieList(props) {
       tit = "now_playing";
       setPageTitle("Now playing");
     }
-
+  
     const movieUrl = `${url}${tit}?api_key=${apiKey}&language=${lang}`;
 
     if (props.cat === "favorites") {
         let cachedFav = JSON.parse(localStorage.getItem("movies"));
-        setMovies(cachedFav);
+        // setFavMovies(prev => [...prev, cachedFav]);
+        setMovies(cachedFav)
       }
 
     try {
@@ -64,7 +68,6 @@ export default function MovieList(props) {
   //     return movie.title === this.state.searchString
   //   })
   // }
-
     return (
       <div className="container-fluid pl-5">
         <h2 className="white mt-4">{pageTitle}</h2>
@@ -73,8 +76,7 @@ export default function MovieList(props) {
             movies.map(movie => {
               return (
                 <Movie 
-                  // details={this.handleDetails}
-                  
+                  // details={this.handleDetails}                  
                   key={movie.id}
                   movie={movie}
                   prefix={prefix}
