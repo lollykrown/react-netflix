@@ -1,14 +1,19 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import axios from "axios";
 import moment from "moment";
 import Star from './Star'
 // import Loading from './Loading'
 
-import { MovieContext } from "../MovieContext";
+// import { MovieContext } from "../MovieContext";
 
 export default function MovieDetails(props) {
-  const { prefix, url, apiKey, lang } = useContext(MovieContext)
+  // const { prefix, url, apiKey, lang } = useContext(MovieContext)
+
+  const prefix = "https://image.tmdb.org/t/p/w500";  
+  const url = "https://api.themoviedb.org/3/movie/";
+  const apiKey = "0180207eb6ef9e35482bc3aa2a2b9672";
+  const lang = "en-US"
 
   const [movie, setMovie] = useState({});
   // const [loading, setLoading] = useState(false)
@@ -21,8 +26,7 @@ export default function MovieDetails(props) {
       const detailsUrl = `${url}${props.match.params.id}?api_key=${apiKey}&language=${lang}`;
     
       try {
-        const response = await axios.get(detailsUrl, {  cancelToken: source.token
-        });
+        const response = await axios.get(detailsUrl, {  cancelToken: source.token });
         setMovie(response.data);
         // setLoading(false)
       } catch (error) {
@@ -30,15 +34,16 @@ export default function MovieDetails(props) {
           console.log('Request canceled', error.message);
         } else {
           // handle error
-          console.error(error);
+          throw error
         }
       }
     };
     getMovieById();
+
     return () => {
       source.cancel()
   }
-  });
+  }, [props]);
 
   const [cast, setCast] = useState([]);
 
@@ -56,7 +61,7 @@ export default function MovieDetails(props) {
           console.log('Request canceled', error.message);
         } else {
           // handle error
-          console.error(error);
+          throw error
         }
       }
     };
@@ -64,7 +69,7 @@ export default function MovieDetails(props) {
     return () => {
       source.cancel()
   }
-  });
+  }, [props]);
 
   const [trailers, setTrailers] = useState([]);
 
@@ -82,7 +87,7 @@ export default function MovieDetails(props) {
           console.log('Request canceled', error.message);
         } else {
           // handle error
-          console.error(error);
+          throw error
         }
       }
     };
@@ -91,7 +96,7 @@ export default function MovieDetails(props) {
     return () => {
       source.cancel()
   }
-  });
+  }, [props]);
 
   // if(loading) {
   //   return <Loading />
