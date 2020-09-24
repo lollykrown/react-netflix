@@ -149,7 +149,7 @@ export default function MovieDetails(props) {
                 <span className="badge badge-success">Thriller</span>
                 <p className="card-text mt-3">
                   <small className="mr-3">{date}</small>
-                  <span className="badge btn stars-no">{ratings}</span>
+                  <span className="badge btn stars-no">{ratings.toString()}</span>
                   <Star rating={ratings}/>
                 </p>
                 <span className="fa fa-heart" title="add to favorites"></span>

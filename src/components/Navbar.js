@@ -8,6 +8,7 @@ function Navbar(){
   const [movies] = moviesList
   const [, setFilteredMovies] = filteredMovies;
 
+  // console.log(movies)
   const [search, setSearch] = useState('')
   
   useEffect(() => {
