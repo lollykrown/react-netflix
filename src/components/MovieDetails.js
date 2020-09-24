@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import axios from "axios";
 import moment from "moment";
-import Star from './Star'
+import Star from "./Star";
 // import Loading from './Loading'
 
 // import { MovieContext } from "../MovieContext";
@@ -10,99 +10,105 @@ import Star from './Star'
 export default function MovieDetails(props) {
   // const { prefix, url, apiKey, lang } = useContext(MovieContext)
 
-  const prefix = "https://image.tmdb.org/t/p/w500";  
+  const prefix = "https://image.tmdb.org/t/p/w500";
   const url = "https://api.themoviedb.org/3/movie/";
   const apiKey = "0180207eb6ef9e35482bc3aa2a2b9672";
-  const lang = "en-US"
+  const lang = "en-US";
 
   const [movie, setMovie] = useState({});
   // const [loading, setLoading] = useState(false)
 
   useEffect(() => {
-    const source = axios.CancelToken.source()
+    const source = axios.CancelToken.source();
 
     // setLoading(true)
     const getMovieById = async () => {
       const detailsUrl = `${url}${props.match.params.id}?api_key=${apiKey}&language=${lang}`;
-    
+
       try {
-        const response = await axios.get(detailsUrl, {  cancelToken: source.token });
+        const response = await axios.get(detailsUrl, {
+          cancelToken: source.token,
+        });
         setMovie(response.data);
         // setLoading(false)
       } catch (error) {
         if (axios.isCancel(error)) {
-          console.log('Request canceled', error.message);
+          console.log("Request canceled", error.message);
         } else {
           // handle error
-          throw error
+          throw error;
         }
       }
     };
     getMovieById();
 
     return () => {
-      source.cancel()
-  }
+      source.cancel();
+    };
   }, [props]);
 
   const [cast, setCast] = useState([]);
 
   useEffect(() => {
-    const source = axios.CancelToken.source()
+    const source = axios.CancelToken.source();
 
     const getCast = async () => {
       const castUrl = `${url}${props.match.params.id}/credits?api_key=${apiKey}`;
-  
+
       try {
-        const response = await axios.get(castUrl, { cancelToken: source.token});
+        const response = await axios.get(castUrl, {
+          cancelToken: source.token,
+        });
         setCast(response.data.cast);
       } catch (error) {
         if (axios.isCancel(error)) {
-          console.log('Request canceled', error.message);
+          console.log("Request canceled", error.message);
         } else {
           // handle error
-          throw error
+          throw error;
         }
       }
     };
     getCast();
     return () => {
-      source.cancel()
-  }
+      source.cancel();
+    };
   }, [props]);
 
   const [trailers, setTrailers] = useState([]);
 
   useEffect(() => {
-    const source = axios.CancelToken.source()
+    const source = axios.CancelToken.source();
 
     const getTrailers = async () => {
       const trailersUrl = `${url}${props.match.params.id}$/videos?api_key=${apiKey}&language=${lang}`;
-  
+
       try {
-        const response = await axios.get(trailersUrl, { cancelToken: source.token});
+        const response = await axios.get(trailersUrl, {
+          cancelToken: source.token,
+        });
         setTrailers(response.data.results);
       } catch (error) {
         if (axios.isCancel(error)) {
-          console.log('Request canceled', error.message);
+          console.log("Request canceled", error.message);
         } else {
           // handle error
-          throw error
+          throw error;
         }
       }
     };
     getTrailers();
 
     return () => {
-      source.cancel()
-  }
+      source.cancel();
+    };
   }, [props]);
 
   // if(loading) {
   //   return <Loading />
   // }
 
-    // genre_ids: (5) [28, 12, 18, 14, 10752]
+  // genre_ids: (5) [28, 12, 18, 14, 10752]
 
   const {
     backdrop_path,
@@ -149,8 +155,10 @@ export default function MovieDetails(props) {
                 <span className="badge badge-success">Thriller</span>
                 <p className="card-text mt-3">
                   <small className="mr-3">{date}</small>
-                  <span className="badge btn stars-no">{ratings.toString()}</span>
-                  <Star rating={ratings}/>
+                  <span className="badge btn stars-no">
+                    {ratings.toString()}
+                  </span>
+                  <Star rating={ratings} />
                 </p>
                 <span className="fa fa-heart" title="add to favorites"></span>
                 <span className="fa fa-trash" title="delete"></span>
@@ -159,7 +167,7 @@ export default function MovieDetails(props) {
               <div className="col-lg-5 ml-3">
                 <p className="card-title">Cast</p>
                 <div className="cast row">
-                  {cast.map(c => {
+                  {cast.map((c) => {
                     if (c.profile_path) {
                       return (
                         <div key={c.id} className="">
@@ -184,10 +192,10 @@ export default function MovieDetails(props) {
           <div className="row card">
             <h3 className="card-title">Trailers</h3>
             <div className="trailer-div">
-              {trailers.map(t => {
+              {trailers.map((t) => {
                 if (t.key) {
                   return (
-                    <div key={movie.id}>
+                    <div key={t.id}>
                       <span className="trailer-span">
                         <iframe
                           title={movie.title}

@@ -11,10 +11,12 @@ import Default from './components/Default';
 import MovieList from './components/MovieList';
 import MovieDetails from './components/MovieDetails';
 import Loading from './components/Loading';
+import Navbar from './components/Navbar';
 
 function App() {
   return (
     <React.Fragment>
+    <Navbar/>
     <Switch>
       <Route exact path="/" component={Home} />
       <Route exact path="/popular" component={() => <MovieList cat={"popular"} />} /> 

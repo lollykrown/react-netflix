@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import Movie from './Movie'
 // import Loading from './Loading'
-import Navbar from './Navbar'
 
 import { MovieContext } from "../MovieContext";
 
@@ -9,52 +8,60 @@ import axios from 'axios';
 
 export default function MovieList(props) {
 
-  const { moviesList, filteredMovies, url, apiKey, lang } = useContext(MovieContext)
-  const [movies, setMovies] = moviesList
-  const [filtered,] = filteredMovies
+  const { movies, addMovies, filtered, addFavMovies, url, apiKey, lang } = useContext(MovieContext)
  
   const [pageTitle, setPageTitle] = useState('')
   // const [loading, setLoading] = useState(false)
-  
-  const getMovies = async () => {
-    // const movieslistUrl =
-    //   "https://api.themoviedb.org/4/list/?page=1&api_key=0180207eb6ef9e35482bc3aa2a2b9672";
-    // const searchUrl = "https://api.themoviedb.org/3/search/movie";
 
-    let tit;
-    if (props.cat === "popular") {
-      tit = "popular";
-      setPageTitle("Popular Movies");
-    } else if (props.cat === "top") {
-      tit = "top_rated";
-      setPageTitle("Top Rated Movies");
-    } else if (props.cat === "now") {
-      tit = "now_playing";
-      setPageTitle("Now playing");
-    }
-  
-    const movieUrl = `${url}${tit}?api_key=${apiKey}&language=${lang}`;
+  let tit;
+  if (props.cat === "popular") {
+	tit = "popular";
+	setPageTitle("Popular Movies");
+  } else if (props.cat === "top") {
+	tit = "top_rated";
+	setPageTitle("Top Rated Movies");
+  } else if (props.cat === "now") {
+	tit = "now_playing";
+	setPageTitle("Now playing");
+  }
 
-    if (props.cat === "favorites") {
-        let cachedFav = JSON.parse(localStorage.getItem("movies"));
-        setMovies(cachedFav)
-        // setLoading(false)
-      }
-
-    try {
-      const response = await axios.get(movieUrl);
-      setMovies(response.data.results);
-      // setLoading(false)
-    } catch (error) {
-      console.error(error);
-    }
-  };
+  if (props.cat === "favorites") {
+	let cachedFav = JSON.parse(localStorage.getItem("movies"));
+	addFavMovies(cachedFav)
+	// setLoading(false)
+  }
 
   useEffect(() => {
+    const source = axios.CancelToken.source()
+
     // setLoading(true)
+    const getMovies = async () => {
+      // const movieslistUrl =
+      //   "https://api.themoviedb.org/4/list/?page=1&api_key=0180207eb6ef9e35482bc3aa2a2b9672";
+      // const searchUrl = "https://api.themoviedb.org/3/search/movie";
+    
+      const movieUrl = `${url}${tit}?api_key=${apiKey}&language=${lang}`;
+  
+      try {
+        const response = await axios.get(movieUrl, { cancelToken: source.token });
+        addMovies(response.data.results);
+        // setLoading(false)
+      } catch (error) {
+        if (axios.isCancel(error)) {
+          console.log('Request canceled', error.message);
+        } else {
+          // handle error
+          throw error
+        }
+      }
+    };
+    
     getMovies()
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[movies])
+    return () => {
+      source.cancel()
+  }
+  }, [movies])
 
   // if(loading) {
   //   return <Loading />
@@ -62,12 +69,10 @@ export default function MovieList(props) {
 
     return (
       <React.Fragment>
-      <Navbar mov={movies}/>
-
       <div className="container-fluid pl-5">
         <h2 className="white mt-4">{pageTitle}</h2>
         <div className="row">
-            {filtered.map(movie => {
+            {movies.map(movie => {
               return (
                 <Movie 
                   key={movie.id}

@@ -8,18 +8,17 @@ export default function Movie({ movie }) {
 
   const { prefix } = useContext(MovieContext)
 
-  const checkIfFav = (id) => {
-    let fav = JSON.parse(localStorage.getItem("movies"));
-    if(fav){
-    const moviee = fav.find((e) => e.id === id);
-    moviee && setIsFav(!isFav);
-    }
-  };
-
   useEffect(() => {
+    const checkIfFav = (id) => {
+      let fav = JSON.parse(localStorage.getItem("movies"));
+      if(fav){
+      const moviee = fav.find((e) => e.id === id);
+      moviee && setIsFav(!isFav);
+      }
+    };
+
     checkIfFav(movie.id);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[movie]);
+  },[movie, isFav]);
 
   const addToFav = (el) => {
     let movieCache = [];

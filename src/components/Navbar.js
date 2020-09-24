@@ -4,15 +4,12 @@ import styled from "styled-components";
 import { MovieContext } from "../MovieContext";
 
 function Navbar(){
-  const { moviesList, filteredMovies } = useContext(MovieContext)
-  const [movies] = moviesList
-  const [, setFilteredMovies] = filteredMovies;
+  const { movies, addFilteredMovies } = useContext(MovieContext)
 
-  // console.log(movies)
   const [search, setSearch] = useState('')
   
   useEffect(() => {
-    setFilteredMovies(
+    addFilteredMovies(
       movies.filter( m => {
         return m.title.toLowerCase().includes(search.toLowerCase())
       })

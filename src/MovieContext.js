@@ -12,12 +12,27 @@ export const MovieProvider = (props) => {
     const apiKey = "0180207eb6ef9e35482bc3aa2a2b9672";
     const lang = "en-US"
 
+    const addMovies = (res) => {        
+        setMovies([...res]);
+    }
+
+    const addFavMovies = (res) => {     
+        if(res){ 
+        setMovies([...res]);
+        }
+    }
+
+    const addFilteredMovies = (res) => {        
+        setFilteredMovies([...filtered, res]);
+    }
+
     return (
         <MovieContext.Provider value={{
             fav: [isFav, setIsFav],
-            moviesList: [movies, setMovies],
-            filteredMovies: [filtered, setFilteredMovies],
-            prefix, url, apiKey, lang
+            movies, addMovies, addFavMovies,
+            filtered, addFilteredMovies,
+            prefix, url, apiKey, lang,
+
         }}>
             {props.children}
         </MovieContext.Provider>
