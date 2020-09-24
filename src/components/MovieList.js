@@ -53,7 +53,8 @@ export default function MovieList(props) {
   useEffect(() => {
     // setLoading(true)
     getMovies()
-  },[getMovies])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[movies])
 
   // if(loading) {
   //   return <Loading />

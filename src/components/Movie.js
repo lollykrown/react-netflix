@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext, useCallback } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { MovieContext } from "../MovieContext";
@@ -8,15 +8,18 @@ export default function Movie({ movie }) {
 
   const { prefix } = useContext(MovieContext)
 
-  const checkIfFav = useCallback((id) => {
-    const fav = JSON.parse(localStorage.getItem("movies"));
+  const checkIfFav = (id) => {
+    let fav = JSON.parse(localStorage.getItem("movies"));
+    if(fav){
     const moviee = fav.find((e) => e.id === id);
     moviee && setIsFav(!isFav);
-  },[isFav]);
+    }
+  };
 
   useEffect(() => {
     checkIfFav(movie.id);
-  },[movie.id, checkIfFav]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[movie]);
 
   const addToFav = (el) => {
     let movieCache = [];

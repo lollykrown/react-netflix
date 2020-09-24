@@ -16,6 +16,7 @@ function Navbar(){
         return m.title.toLowerCase().includes(search.toLowerCase())
       })
     )
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [search, movies])
 
     return (

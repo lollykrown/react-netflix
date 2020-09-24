@@ -1,9 +1,9 @@
-import React, { useState, useEffect, useContext, useCallback } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import styled from "styled-components";
 import axios from "axios";
 import moment from "moment";
 import Star from './Star'
-import Loading from './Loading'
+// import Loading from './Loading'
 
 import { MovieContext } from "../MovieContext";
 
@@ -13,55 +13,84 @@ export default function MovieDetails(props) {
   const [movie, setMovie] = useState({});
   // const [loading, setLoading] = useState(false)
 
-  const getMovieById = async () => {
-    const detailsUrl = `${url}${props.match.params.id}?api_key=${apiKey}&language=${lang}`;
-
-    console.log(detailsUrl);
-
-    try {
-      const response = await axios.get(detailsUrl);
-      setMovie(response.data);
-      // setLoading(false)
-    } catch (error) {
-      console.error(error);
-    }
-  };
   useEffect(() => {
+    const source = axios.CancelToken.source()
+
     // setLoading(true)
+    const getMovieById = async () => {
+      const detailsUrl = `${url}${props.match.params.id}?api_key=${apiKey}&language=${lang}`;
+    
+      try {
+        const response = await axios.get(detailsUrl, {  cancelToken: source.token
+        });
+        setMovie(response.data);
+        // setLoading(false)
+      } catch (error) {
+        if (axios.isCancel(error)) {
+          console.log('Request canceled', error.message);
+        } else {
+          // handle error
+          console.error(error);
+        }
+      }
+    };
     getMovieById();
-  },[]);
+    return () => {
+      source.cancel()
+  }
+  });
 
   const [cast, setCast] = useState([]);
 
-  const getCast = async () => {
-    const castUrl = `${url}${props.match.params.id}/credits?api_key=${apiKey}`;
-
-    try {
-      const response = await axios.get(castUrl);
-      setCast(response.data.cast);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
   useEffect(() => {
+    const source = axios.CancelToken.source()
+
+    const getCast = async () => {
+      const castUrl = `${url}${props.match.params.id}/credits?api_key=${apiKey}`;
+  
+      try {
+        const response = await axios.get(castUrl, { cancelToken: source.token});
+        setCast(response.data.cast);
+      } catch (error) {
+        if (axios.isCancel(error)) {
+          console.log('Request canceled', error.message);
+        } else {
+          // handle error
+          console.error(error);
+        }
+      }
+    };
     getCast();
+    return () => {
+      source.cancel()
+  }
   });
 
   const [trailers, setTrailers] = useState([]);
 
   useEffect(() => {
+    const source = axios.CancelToken.source()
+
     const getTrailers = async () => {
       const trailersUrl = `${url}${props.match.params.id}$/videos?api_key=${apiKey}&language=${lang}`;
   
       try {
-        const response = await axios.get(trailersUrl);
+        const response = await axios.get(trailersUrl, { cancelToken: source.token});
         setTrailers(response.data.results);
       } catch (error) {
-        console.error(error);
+        if (axios.isCancel(error)) {
+          console.log('Request canceled', error.message);
+        } else {
+          // handle error
+          console.error(error);
+        }
       }
     };
     getTrailers();
+
+    return () => {
+      source.cancel()
+  }
   });
 
   // if(loading) {
