@@ -5,7 +5,7 @@ const StyledPlaylistItem = styled.div`
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background: none;
-  border: ${props => (props.active ? "2px dotted #696969" : "none")};
+  border: ${props => (props.active ? "2px dotted #FF001F" : "none")};
   font-size: 1.6em;
   color: ${props => props.theme.color};
   min-height: 50px;

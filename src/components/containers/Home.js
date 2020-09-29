@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { ThemeProvider } from 'styled-components';
 import Video from '../Video';
-import Playlist from '../containers/Playlist';
+import Playlist from './Playlist';
 import StyledWbnPlayer from '../styles/StyledWbnPlayer';
 
 const theme = {
@@ -24,7 +24,7 @@ const themeLight = {
   color: '#353535',
 };
 
-const WbnPlayer = props => {
+const Home = (props) => {
   const videos = JSON.parse(document.querySelector('[name="videos"]').value);
   const savedState = JSON.parse(localStorage.getItem(`${videos.playlistId}`));
 
@@ -128,4 +128,4 @@ const WbnPlayer = props => {
   );
 };
 
-export default WbnPlayer;
+export default Home;
