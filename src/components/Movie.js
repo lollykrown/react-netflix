@@ -10,7 +10,7 @@ export default function Movie({ movie }) {
 
   useEffect(() => {
     const checkIfFav = (id) => {
-      let fav = JSON.parse(localStorage.getItem("movies"));
+      const fav = JSON.parse(localStorage.getItem("movies"));
       if(fav){
       const moviee = fav.find((e) => e.id === id);
       moviee && setIsFav(!isFav);

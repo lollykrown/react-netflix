@@ -13,26 +13,27 @@ export default function MovieList(props) {
   const [pageTitle, setPageTitle] = useState('')
   // const [loading, setLoading] = useState(false)
 
-  let tit;
-  if (props.cat === "popular") {
-	tit = "popular";
-	setPageTitle("Popular Movies");
-  } else if (props.cat === "top") {
-	tit = "top_rated";
-	setPageTitle("Top Rated Movies");
-  } else if (props.cat === "now") {
-	tit = "now_playing";
-	setPageTitle("Now playing");
-  }
 
-  if (props.cat === "favorites") {
-	let cachedFav = JSON.parse(localStorage.getItem("movies"));
-	addFavMovies(cachedFav)
-	// setLoading(false)
-  }
 
   useEffect(() => {
     const source = axios.CancelToken.source()
+
+    let tit;
+    if (props.cat === "popular") {
+      tit = "popular";
+      setPageTitle("Popular Movies");
+    } else if (props.cat === "top") {
+      tit = "top_rated";
+      setPageTitle("Top Rated Movies");
+    } else if (props.cat === "now") {
+      tit = "now_playing";
+      setPageTitle("Now playing");
+    }
+	if (props.cat === "favorites") {
+		let cachedFav = JSON.parse(localStorage.getItem("movies"));
+		addFavMovies(cachedFav)
+		// setLoading(false)
+	  }
 
     // setLoading(true)
     const getMovies = async () => {
