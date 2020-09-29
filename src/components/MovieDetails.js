@@ -6,11 +6,7 @@ import axios from 'axios';
 
 // import Loading from './Loading'
 
-// import { MovieContext } from "../MovieContext";
-
 export default function MovieDetails(props) {
-  // const { prefix, url, apiKey, lang } = useContext(MovieContext)
-
   const prefix = "https://image.tmdb.org/t/p/w500";
   const url = "https://api.themoviedb.org/3/movie/";
   const apiKey = "0180207eb6ef9e35482bc3aa2a2b9672";
@@ -18,20 +14,6 @@ export default function MovieDetails(props) {
 
   const [movie, setMovie] = useState({});
   // const [loading, setLoading] = useState(false)
-
-  const [isFav, setIsFav] = useState(false)
-
-  useEffect(() => {
-    const checkIfFav = (id) => {
-      let fav = JSON.parse(localStorage.getItem("movies"));
-      if(fav){
-      const moviee = fav.find((e) => e.id === id);
-      moviee && setIsFav(!isFav);
-      }
-    };
-
-    checkIfFav(movie.id);
-  },[]);
 
   useEffect(() => {
     const source = axios.CancelToken.source();
@@ -175,8 +157,6 @@ export default function MovieDetails(props) {
                   </span>
                   <Star rating={ratings} />
                 </p>
-                <span className="fa fa-heart" title="add to favorites"></span>
-                <span className="fa fa-trash" title="delete"></span>
               </div>
 
               <div className="col-lg-5 ml-3">

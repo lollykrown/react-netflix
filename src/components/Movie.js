@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { MovieContext } from "../MovieContext";
 
 export default function Movie({ movie }) {
-  const [isFav, setFav] = useState(false)
+  const [isFav, setIsFav] = useState(false)
 
   const { prefix, addMovies } = useContext(MovieContext)
 
@@ -13,12 +13,12 @@ export default function Movie({ movie }) {
       let fav = JSON.parse(localStorage.getItem("movies"));
       if(fav){
       const moviee = fav.find((e) => e.id === id);
-      moviee && setFav();
+      moviee && setIsFav(!isFav);
       }
     };
 
     checkIfFav(movie.id);
-  },[movie.id]);
+  },[]);
 
   const addToFav = (el) => {
     let movieCache = [];
@@ -34,7 +34,7 @@ export default function Movie({ movie }) {
       if (!isthere) {
         oldCache.push(el);
         localStorage.setItem("movies", JSON.stringify(oldCache));
-        setFav()
+        setIsFav(!isFav)
         alert(`${el.title} added to your favorites`);
       } else {
         alert(`${el.title} is already in your favorites`);
@@ -52,7 +52,8 @@ export default function Movie({ movie }) {
     localStorage.removeItem("movies");
     localStorage.setItem("movies", JSON.stringify(fav));
     let cachedFav = JSON.parse(localStorage.getItem("movies"));
-    setFav()
+    setIsFav(!isFav)
+
     addMovies(cachedFav)
   };
 
