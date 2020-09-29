@@ -4,7 +4,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import GlobalStyle from '../styles/GlobalStyle';
 
 const App = () => (
-  <BrowserRouter basename="/react_videoplayer/">
+  <BrowserRouter basename="/videoplayer/">
   <>
     <Switch>
       <Route exact path="/" component={Home} />
