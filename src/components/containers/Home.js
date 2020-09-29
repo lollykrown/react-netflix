@@ -86,7 +86,7 @@ const Home = (props) => {
   };
 
   const progressCallback = e => {
-    if (e.playedSeconds > 10 && e.playedSeconds < 11) {
+    if (e.playedSeconds > 25 && e.playedSeconds < 26) {
       const videos = [...state.videos];
       const playedVideo = videos.find(
         video => video.id === state.activeVideo.id,
