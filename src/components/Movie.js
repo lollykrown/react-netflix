@@ -8,17 +8,17 @@ export default function Movie({ movie }) {
 
   const { prefix } = useContext(MovieContext)
 
-  // useEffect(() => {
-  //   const checkIfFav = (id) => {
-  //     let fav = JSON.parse(localStorage.getItem("movies"));
-  //     if(fav){
-  //     const moviee = fav.find((e) => e.id === id);
-  //     moviee && setIsFav(!isFav);
-  //     }
-  //   };
+  useEffect(() => {
+    const checkIfFav = (id) => {
+      let fav = JSON.parse(localStorage.getItem("movies"));
+      if(fav){
+      const moviee = fav.find((e) => e.id === id);
+      moviee && setIsFav(!isFav);
+      }
+    };
 
-  //   checkIfFav(movie.id);
-  // },[movie, isFav]);
+    checkIfFav(movie.id);
+  },[]);
 
   const addToFav = (el) => {
     let movieCache = [];

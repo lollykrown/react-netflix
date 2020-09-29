@@ -16,20 +16,14 @@ export const MovieProvider = (props) => {
         setMovies([...res]);
     }
 
-    const addFavMovies = (res) => {     
-        if(res){ 
-        setMovies([...res]);
-        }
-    }
-
     const addFilteredMovies = (res) => {        
-        setFilteredMovies([...filtered, res]);
+        setFilteredMovies([...res]);
     }
 
     return (
         <MovieContext.Provider value={{
             fav: [isFav, setIsFav],
-            movies, addMovies, addFavMovies,
+            movies, addMovies,
             filtered, addFilteredMovies,
             prefix, url, apiKey, lang,
 

@@ -73,7 +73,7 @@ export default function MovieList(props) {
       <div className="container-fluid pl-5">
         <h2 className="white mt-4">{pageTitle}</h2>
         <div className="row">
-            {movies.map(movie => {
+            {filtered.map(movie => {
               return (
                 <Movie 
                   key={movie.id}
