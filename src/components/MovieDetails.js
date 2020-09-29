@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import axios from "axios";
 import moment from "moment";
 import Star from "./Star";
+import axios from 'axios';
+
 // import Loading from './Loading'
 
 // import { MovieContext } from "../MovieContext";
