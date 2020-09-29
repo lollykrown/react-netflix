@@ -19,6 +19,20 @@ export default function MovieDetails(props) {
   const [movie, setMovie] = useState({});
   // const [loading, setLoading] = useState(false)
 
+  const [isFav, setIsFav] = useState(false)
+
+  useEffect(() => {
+    const checkIfFav = (id) => {
+      let fav = JSON.parse(localStorage.getItem("movies"));
+      if(fav){
+      const moviee = fav.find((e) => e.id === id);
+      moviee && setIsFav(!isFav);
+      }
+    };
+
+    checkIfFav(movie.id);
+  },[]);
+
   useEffect(() => {
     const source = axios.CancelToken.source();
 

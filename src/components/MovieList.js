@@ -9,7 +9,7 @@ import { MovieContext } from "../MovieContext";
 
 export default function MovieList(props) {
 
-  const { movies, addMovies, filtered, url, apiKey, lang } = useContext(MovieContext)
+  const { addMovies, filtered, url, apiKey, lang } = useContext(MovieContext)
  
   const [pageTitle, setPageTitle] = useState('')
   // const [loading, setLoading] = useState(false)
