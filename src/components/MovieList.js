@@ -9,7 +9,7 @@ import { MovieContext } from "../MovieContext";
 
 export default function MovieList(props) {
 
-  const { movies, addMovies, filtered, addFavMovies, url, apiKey, lang } = useContext(MovieContext)
+  const { movies, addMovies, filtered, url, apiKey, lang } = useContext(MovieContext)
  
   const [pageTitle, setPageTitle] = useState('')
   // const [loading, setLoading] = useState(false)
@@ -31,7 +31,7 @@ export default function MovieList(props) {
 
     if (props.cat === "favorites") {
     let cachedFav = JSON.parse(localStorage.getItem("movies"));
-    addFavMovies(cachedFav)
+    addMovies(cachedFav)
     // setLoading(false)
     }
 
@@ -62,7 +62,7 @@ export default function MovieList(props) {
     return () => {
       source.cancel()
   }
-  }, [props])
+  }, [props, pageTitle])
 
   // if(loading) {
   //   return <Loading />
