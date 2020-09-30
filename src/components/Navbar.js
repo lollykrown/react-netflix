@@ -94,9 +94,6 @@ function Navbar(props){
         }
         <ul className="navbar-nav align-items-center ml-auto">
         <li className="nav-item ml-4">
-            {/* <Link to="/" className="nav-link">
-              Contact us
-            </Link> */}
             <a href="mailto:joe_kayu@yahoo.com" className="nav-link">
               Contact us
             </a>
