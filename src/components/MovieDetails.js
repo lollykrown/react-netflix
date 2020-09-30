@@ -4,7 +4,7 @@ import moment from "moment";
 import Star from "./Star";
 import axios from 'axios';
 
-// import Loading from './Loading'
+import Loading from './Loading'
 
 export default function MovieDetails(props) {
   const prefix = "https://image.tmdb.org/t/p/w500";
@@ -13,12 +13,12 @@ export default function MovieDetails(props) {
   const lang = "en-US";
 
   const [movie, setMovie] = useState({});
-  // const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
     const source = axios.CancelToken.source();
 
-    // setLoading(true)
+    setLoading(true)
     const getMovieById = async () => {
       const detailsUrl = `${url}${props.match.params.id}?api_key=${apiKey}&language=${lang}`;
 
@@ -27,7 +27,7 @@ export default function MovieDetails(props) {
           cancelToken: source.token,
         });
         setMovie(response.data);
-        // setLoading(false)
+        setLoading(false)
       } catch (error) {
         if (axios.isCancel(error)) {
           console.log("Request canceled", error.message);
@@ -101,9 +101,9 @@ export default function MovieDetails(props) {
     };
   }, [props]);
 
-  // if(loading) {
-  //   return <Loading />
-  // }
+  if(loading) {
+    return <Loading />
+  }
 
   // genre_ids: (5) [28, 12, 18, 14, 10752]
 

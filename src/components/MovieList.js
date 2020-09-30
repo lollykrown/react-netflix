@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import Movie from './Movie'
 import axios from 'axios';
 
-// import Loading from './Loading'
+import Loading from './Loading'
 
 import { MovieContext } from "../MovieContext";
 
@@ -11,7 +11,7 @@ export default function MovieList(props) {
   const { addMovies, filtered, url, apiKey, lang } = useContext(MovieContext)
  
   const [pageTitle, setPageTitle] = useState('')
-  // const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
     const source = axios.CancelToken.source() 
@@ -32,10 +32,9 @@ export default function MovieList(props) {
       setPageTitle("Favorite Movies")
     let cachedFav = JSON.parse(localStorage.getItem("movies"));
     addMovies(cachedFav)
-    // setLoading(false)
+    setLoading(!loading)
     }
 
-    // setLoading(true)
     const getMovies = async (ti) => {
       // const movieslistUrl =
       //   "https://api.themoviedb.org/4/list/?page=1&api_key=0180207eb6ef9e35482bc3aa2a2b9672";
@@ -44,32 +43,27 @@ export default function MovieList(props) {
       const movieUrl = `${url}${ti}?api_key=${apiKey}&language=${lang}`;
   
       try {
-        // const moviiiiii = await axios.get(movieslistUrl, { cancelToken: source.token });
-        // console.log(moviiiiii)
-
         const response = await axios.get(movieUrl, { cancelToken: source.token });
         addMovies(response.data.results);
-        // setLoading(false)
+        setLoading(false)
       } catch (error) {
         if (axios.isCancel(error)) {
           console.log('Request canceled', error.message);
         } else {
-          // handle error
           throw error
         }
       }
     };
     
     getMovies(tit)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     return () => {
       source.cancel()
   }
   }, [props, pageTitle])
 
-  // if(loading) {
-  //   return <Loading />
-  // }
+  if(loading) {
+    return <Loading />
+  }
 
     return (
       <React.Fragment>
