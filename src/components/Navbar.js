@@ -7,7 +7,15 @@ function Navbar(){
   const { movies, addFilteredMovies } = useContext(MovieContext)
 
   const [search, setSearch] = useState('')
+  const [suggestions, setSuggestions] = useState([])
+  const [titles, setTitles] = useState([])
   
+  useEffect(() => {
+    const t = movies.map(e => e.title)
+    console.log(t)
+    setTitles(t)
+  }, [movies])
+
   useEffect(() => {
     addFilteredMovies(
       movies.filter( m => {
@@ -17,6 +25,19 @@ function Navbar(){
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [search, movies])
 
+
+  const setVal = (e) => {
+    const value = e.target.value;
+    setSearch(value)
+    if(value.length > 0){
+      const regex = new RegExp(`^${value}`, 'i');
+      const sugg = titles.sort().filter(v => v.match(regex))
+      setSuggestions(sugg)
+    } else {
+      setSuggestions([])
+    }
+
+  }
     return (
       <NavWrapper className="navbar navbar-expand-sm bg-default navbar-dark px-sm-5">
       <Link className="navbar-brand" to="/">Mini-<span className="bran">Netflix</span></Link>
@@ -56,16 +77,18 @@ function Navbar(){
             </div>
           </li>
         </ul>
-        <form className="form-inline ml-auto my-lg-0">
-          <input
-            onChange={e=> setSearch(e.target.value)}
-            className="form-control "
-            type="search"
-            placeholder="&#128269; Search Movies"
-            aria-label="Search"
-          />
-            <button type="button" className="btn btn-default">Submit</button>
-        </form>
+          <form className="form-inline ml-auto my-lg-0">
+            <input
+              onChange={e=> setVal(e)}
+              className="form-control "
+              type="search"
+              placeholder="&#128269; Search Movies"
+              aria-label="Search"
+            />
+            <ul className="mr-2">
+                {suggestions.map((t, i) => <li key={i} className="text-white">{t}</li>)}
+            </ul>
+          </form>
         <ul className="navbar-nav align-items-center ml-auto">
         <li className="nav-item ml-4">
             <Link to="/" className="nav-link">
