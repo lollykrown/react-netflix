@@ -94,9 +94,12 @@ function Navbar(props){
         }
         <ul className="navbar-nav align-items-center ml-auto">
         <li className="nav-item ml-4">
-            <Link to="/" className="nav-link">
+            {/* <Link to="/" className="nav-link">
               Contact us
-            </Link>
+            </Link> */}
+            <a href="mailto:joe_kayu@yahoo.com" className="nav-link">
+              Contact us
+            </a>
           </li>
 
           {/* check if user is true */}
