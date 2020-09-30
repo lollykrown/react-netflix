@@ -6,7 +6,7 @@ function Loading() {
         <Loader className="d-flex justify-content-center">
            <div className="">
                 <h1 className="display-3 my-4">Loading...</h1>
-                <img className="my-4" src="loading.gif" alt="loader" width="500" height="400"/>
+                <img className="my-4" src="loading-min.gif" alt="loader" width="500" height="400"/>
            </div>
         </Loader>
     );
