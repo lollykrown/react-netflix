@@ -35,9 +35,9 @@ function Navbar(){
       setSuggestions(sugg)
     } else {
       setSuggestions([])
-    }
-
+    }    
   }
+
     return (
       <NavWrapper className="navbar navbar-expand-sm bg-default navbar-dark px-sm-5">
       <Link className="navbar-brand" to="/">Mini-<span className="bran">Netflix</span></Link>
@@ -80,13 +80,13 @@ function Navbar(){
           <form className="form-inline ml-auto my-lg-0">
             <input
               onChange={e=> setVal(e)}
-              className="form-control "
+              className="form-control"
               type="search"
               placeholder="&#128269; Search Movies"
               aria-label="Search"
             />
-            <ul className="mr-2">
-                {suggestions.map((t, i) => <li key={i} className="text-white">{t}</li>)}
+            <ul>
+                {suggestions.map((t, i) =><span onClick={() => setSearch(t)} key={i} className="badge badge-danger mr-2">{t}</span>)}
             </ul>
           </form>
         <ul className="navbar-nav align-items-center ml-auto">
