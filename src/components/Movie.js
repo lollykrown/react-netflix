@@ -18,7 +18,7 @@ function Movie(props) {
     };
 
     checkIfFav(movie.id);
-  },[]);
+  },[movie]);
 
   const addToFav = (el) => {
     let movieCache = [];

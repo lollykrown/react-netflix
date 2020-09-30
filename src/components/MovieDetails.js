@@ -166,9 +166,8 @@ export default function MovieDetails(props) {
                 <p className="card-title">Cast</p>
                 <div className="cast row">
                   {cast.map((c) => {
-                    if (c.profile_path) {
-                      return (
-                        <div key={c.id} className="">
+                    return c.profile_path &&
+                        (<div key={c.id} className="">
                           <div className="cast-span col-lg-2" title={c.name}>
                             <img
                               className="cast-img"
@@ -179,9 +178,8 @@ export default function MovieDetails(props) {
                             />
                             <p className="cast-text">{c.name}</p>
                           </div>
-                        </div>
-                      );
-                    }
+                        </div>)
+                    
                   })}
                 </div>
               </div>
@@ -191,8 +189,7 @@ export default function MovieDetails(props) {
             <h3 className="card-title">Trailers</h3>
             <div className="trailer-div">
               {trailers.map((t) => {
-                if (t.key) {
-                  return (
+                  return t.key && (
                     <div key={t.id}>
                       <span className="trailer-span">
                         <iframe
@@ -204,7 +201,6 @@ export default function MovieDetails(props) {
                       </span>
                     </div>
                   );
-                }
               })}
             </div>
           </div>

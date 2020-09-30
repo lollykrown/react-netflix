@@ -7,8 +7,11 @@ import Loading from './Loading'
 import { MovieContext } from "../MovieContext";
 
 export default function MovieList(props) {
+  const url = "https://api.themoviedb.org/3/movie/";
+  const apiKey = "0180207eb6ef9e35482bc3aa2a2b9672";
+  const lang = "en-US";
 
-  const { addMovies, filtered, url, apiKey, lang } = useContext(MovieContext)
+  const { addMovies, filtered} = useContext(MovieContext)
  
   const [pageTitle, setPageTitle] = useState('')
   const [loading, setLoading] = useState(false)
