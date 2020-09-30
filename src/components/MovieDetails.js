@@ -5,6 +5,7 @@ import Star from "./Star";
 import axios from 'axios';
 
 import Loading from './Loading'
+import Navbar from "./Navbar";
 
 export default function MovieDetails(props) {
   const prefix = "https://image.tmdb.org/t/p/w500";
@@ -121,6 +122,8 @@ export default function MovieDetails(props) {
   const date = moment(release_date).format("MMMM YYYY");
 
   return (
+    <React.Fragment>
+      <Navbar id={props.match.params.id}/>
     <MovieWrapper>
       <div className="parent">
         <div className="top-image">
@@ -208,6 +211,7 @@ export default function MovieDetails(props) {
         </div>
       </div>
     </MovieWrapper>
+    </React.Fragment>
   );
 }
 

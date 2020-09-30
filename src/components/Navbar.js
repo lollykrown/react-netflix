@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, withRouter} from "react-router-dom";
 import styled from "styled-components";
 import { MovieContext } from "../MovieContext";
 
-function Navbar(){
+function Navbar(props){
   const { movies, addFilteredMovies } = useContext(MovieContext)
 
   const [search, setSearch] = useState('')
@@ -76,7 +76,8 @@ function Navbar(){
             </div>
           </li>
         </ul>
-          <form className="form-inline ml-auto my-lg-0">
+        {!props.id ?          
+            <form className="form-inline ml-auto my-lg-0">
             <input
               onChange={e=> setVal(e)}
               className="form-control"
@@ -89,6 +90,8 @@ function Navbar(){
                 {suggestions.map((t, i) =><span onClick={() => setSearch(t)} key={i} className="badge badge-danger mr-2">{t}</span>)}
             </ul>
           </form>
+          : null
+        }
         <ul className="navbar-nav align-items-center ml-auto">
         <li className="nav-item ml-4">
             <Link to="/" className="nav-link">
@@ -142,4 +145,4 @@ border-bottom: 2px solid rgba(255,255,255,0.65);
 }
 
 `;
-export default Navbar;
+export default withRouter(Navbar);

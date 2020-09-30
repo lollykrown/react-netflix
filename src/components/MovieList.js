@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import Movie from './Movie'
 import axios from 'axios';
-
+import Navbar from '../components/Navbar';
 import Loading from './Loading'
 
 import { MovieContext } from "../MovieContext";
@@ -67,6 +67,8 @@ export default function MovieList(props) {
 
     return (
       <React.Fragment>
+      <Navbar/>
+
       <div className="container-fluid pl-5">
         {(filtered.length < 1 && props.cat === 'favorites')?
           <h2 className="white mt-4 ml-2">You have not made any movie your favorite.</h2>:
