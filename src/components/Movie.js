@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import styled from "styled-components";
 import { MovieContext } from "../MovieContext";
 
-export default function Movie(props) {
+function Movie(props) {
   const [isFav, setIsFav] = useState(false)
   const movie = props.movie
   const { prefix, addMovies } = useContext(MovieContext)
@@ -51,14 +51,11 @@ export default function Movie(props) {
     alert(title, "successfully deleted");
     localStorage.removeItem("movies");
     localStorage.setItem("movies", JSON.stringify(fav));
-    let cachedFav = JSON.parse(localStorage.getItem("movies"));
     setIsFav(!isFav)
-    console.log(props.history)
+    console.log(props)
     // if (props.cat === "favorites"){
     //  props.history.push('/favorites')
     // }
-
-    // addMovies(cachedFav)
   };
 
   const { poster_path, release_date, title } = movie;
@@ -136,3 +133,5 @@ const MovieWrapper = styled.div`
     margin-bottom: -1.25rem;
   }
 `;
+
+export default withRouter(Movie)

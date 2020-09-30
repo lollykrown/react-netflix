@@ -6,7 +6,6 @@ import axios from 'axios';
 
 import { MovieContext } from "../MovieContext";
 
-
 export default function MovieList(props) {
 
   const { addMovies, filtered, url, apiKey, lang } = useContext(MovieContext)
@@ -30,6 +29,7 @@ export default function MovieList(props) {
     }
 
     if (props.cat === "favorites") {
+      setPageTitle("Favorite Movies")
     let cachedFav = JSON.parse(localStorage.getItem("movies"));
     addMovies(cachedFav)
     // setLoading(false)
@@ -37,13 +37,16 @@ export default function MovieList(props) {
 
     // setLoading(true)
     const getMovies = async (ti) => {
-      // const movieslistUrl =
-      //   "https://api.themoviedb.org/4/list/?page=1&api_key=0180207eb6ef9e35482bc3aa2a2b9672";
+      const movieslistUrl =
+        "https://api.themoviedb.org/4/list/?page=1&api_key=0180207eb6ef9e35482bc3aa2a2b9672";
       // const searchUrl = "https://api.themoviedb.org/3/search/movie";
     
       const movieUrl = `${url}${ti}?api_key=${apiKey}&language=${lang}`;
   
       try {
+        const moviiiiii = await axios.get(movieslistUrl, { cancelToken: source.token });
+        console.log(moviiiiii)
+
         const response = await axios.get(movieUrl, { cancelToken: source.token });
         addMovies(response.data.results);
         // setLoading(false)
@@ -64,6 +67,7 @@ export default function MovieList(props) {
   }
   }, [props, pageTitle])
 
+  console.log('pt',pageTitle)
   // if(loading) {
   //   return <Loading />
   // }
@@ -71,7 +75,10 @@ export default function MovieList(props) {
     return (
       <React.Fragment>
       <div className="container-fluid pl-5">
-        <h2 className="white mt-4">{pageTitle}</h2>
+        {/* {(filtered.length < 1 && props.cat === 'favorites')?
+          <h2 className="white mt-4 ml-2">You have not made any movie your favorite.</h2>:
+        <h2 className="white mt-4">{pageTitle}</h2>} */}
+
         <div className="row">
             {filtered.map(movie => {
               return (
