@@ -35,7 +35,7 @@ export default function MovieList(props) {
       setPageTitle("Favorite Movies")
     let cachedFav = JSON.parse(localStorage.getItem("movies"));
     addMovies(cachedFav)
-    setLoading(true)
+    setLoading(false)
     }
 
     const getMovies = async (ti) => {
