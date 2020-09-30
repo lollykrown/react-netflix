@@ -3,9 +3,9 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { MovieContext } from "../MovieContext";
 
-export default function Movie({ movie }) {
+export default function Movie(props) {
   const [isFav, setIsFav] = useState(false)
-
+  const movie = props.movie
   const { prefix, addMovies } = useContext(MovieContext)
 
   useEffect(() => {
@@ -13,7 +13,7 @@ export default function Movie({ movie }) {
       let fav = JSON.parse(localStorage.getItem("movies"));
       if(fav){
       const moviee = fav.find((e) => e.id === id);
-      moviee && setIsFav(!isFav);
+      moviee && setIsFav(prev => !prev);
       }
     };
 
@@ -53,8 +53,12 @@ export default function Movie({ movie }) {
     localStorage.setItem("movies", JSON.stringify(fav));
     let cachedFav = JSON.parse(localStorage.getItem("movies"));
     setIsFav(!isFav)
+    console.log(props.history)
+    // if (props.cat === "favorites"){
+    //  props.history.push('/favorites')
+    // }
 
-    addMovies(cachedFav)
+    // addMovies(cachedFav)
   };
 
   const { poster_path, release_date, title } = movie;

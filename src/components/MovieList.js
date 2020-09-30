@@ -76,6 +76,7 @@ export default function MovieList(props) {
             {filtered.map(movie => {
               return (
                 <Movie 
+                  cat={props.cat}
                   key={movie.id}
                   movie={movie}
                 />

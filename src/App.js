@@ -10,7 +10,7 @@ import Footer from './components/Footer';
 import Default from './components/Default';
 import MovieList from './components/MovieList';
 import MovieDetails from './components/MovieDetails';
-import Loading from './components/Loading';
+// import Loading from './components/Loading';
 import Navbar from './components/Navbar';
 
 function App() {
@@ -24,7 +24,7 @@ function App() {
       <Route exact path="/now playing" component={() => <MovieList cat={"now"} />} />
       <Route exact path="/favorites" component={() => <MovieList cat={"favorites"} />} />  
       <Route exact path="/movie/:id" component={MovieDetails} />   
-      <Route component={Loading} />                                     
+      {/* <Route component={Loading} />                                      */}
       <Route component={Default} />
     </Switch>
     <Footer />

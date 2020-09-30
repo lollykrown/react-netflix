@@ -12,7 +12,6 @@ function Navbar(){
   
   useEffect(() => {
     const t = movies.map(e => e.title)
-    console.log(t)
     setTitles(t)
   }, [movies])
 
