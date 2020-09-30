@@ -2,4 +2,4 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Available Scripts
 
-The live site is at <a href="https://min-netflix.netlify.app/">min-netlix.netlify.app</a>
+The live site is at <a href="https://min-netflix.netlify.app/">min-netflix.netlify.app</a>
