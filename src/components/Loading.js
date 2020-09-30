@@ -6,8 +6,8 @@ function Loading(props) {
     return (
         <Loader className="container">
            <div className="ml-4">
-                <h1 className="display-3">Loading...</h1>
-                <img src="loading.gif" width="342" height="246"/>
+                <h1 className="display-3 my-4">Loading...</h1>
+                <img className="my-4" src="loading.gif" width="342" height="246"/>
            </div>
         </Loader>
     );
