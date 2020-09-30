@@ -38,11 +38,7 @@ export default function MovieList(props) {
     setLoading(false)
     }
 
-    const getMovies = async (ti) => {
-      // const movieslistUrl =
-      //   "https://api.themoviedb.org/4/list/?page=1&api_key=0180207eb6ef9e35482bc3aa2a2b9672";
-      // const searchUrl = "https://api.themoviedb.org/3/search/movie";
-    
+    const getMovies = async (ti) => {    
       const movieUrl = `${url}${ti}?api_key=${apiKey}&language=${lang}`;
   
       try {

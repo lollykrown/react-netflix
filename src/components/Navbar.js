@@ -9,6 +9,9 @@ function Navbar(props){
   const [search, setSearch] = useState('')
   const [suggestions, setSuggestions] = useState([])
   const [titles, setTitles] = useState([])
+
+
+  
   
   useEffect(() => {
     const t = movies.map(e => e.title)
