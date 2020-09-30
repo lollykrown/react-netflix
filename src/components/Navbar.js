@@ -81,10 +81,11 @@ function Navbar(){
               onChange={e=> setVal(e)}
               className="form-control"
               type="search"
+              value={search}
               placeholder="&#128269; Search Movies"
               aria-label="Search"
             />
-            <ul>
+            <ul className="mt-3">
                 {suggestions.map((t, i) =><span onClick={() => setSearch(t)} key={i} className="badge badge-danger mr-2">{t}</span>)}
             </ul>
           </form>

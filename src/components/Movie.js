@@ -6,7 +6,7 @@ import { MovieContext } from "../MovieContext";
 function Movie(props) {
   const [isFav, setIsFav] = useState(false)
   const movie = props.movie
-  const { prefix, addMovies } = useContext(MovieContext)
+  const { prefix } = useContext(MovieContext)
 
   useEffect(() => {
     const checkIfFav = (id) => {
@@ -53,9 +53,9 @@ function Movie(props) {
     localStorage.setItem("movies", JSON.stringify(fav));
     setIsFav(!isFav)
     console.log(props)
-    // if (props.cat === "favorites"){
-    //  props.history.push('/favorites')
-    // }
+    if (props.cat === "favorites"){
+     props.history.push('/favorites')
+    }
   };
 
   const { poster_path, release_date, title } = movie;
