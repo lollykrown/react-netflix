@@ -2,12 +2,11 @@ import React from 'react';
 import styled from "styled-components";
 
 function Loading(props) {
-
     return (
         <Loader className="container mb-4">
            <div className="ml-4">
                 <h1 className="display-3 my-4">Loading...</h1>
-                <img className="my-4" src="loading.gif" width="342" height="246"/>
+                <img className="my-4" src="loading.gif" width="500" height="400"/>
            </div>
         </Loader>
     );
