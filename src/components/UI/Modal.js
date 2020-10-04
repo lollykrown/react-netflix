@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Aux from '../../hoc/Aux';
+import Au from '../../hoc/Au';
 import Backdrop from './Backdrop';
 
 export default function Modal(props) {
