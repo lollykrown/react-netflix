@@ -12,7 +12,7 @@ export default function Modal(props) {
   };
 
   return (
-    <Aux>
+    <Au>
       <Backdrop show={props.show} toggleBackdrop={props.modalClosed} />
       <div
         style={backgroundStyle}
@@ -20,6 +20,6 @@ export default function Modal(props) {
       >
         {props.children}
       </div>
-    </Aux>
+    </Au>
   );
 }

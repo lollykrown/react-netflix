@@ -1,12 +1,12 @@
 import React from 'react';
 
-import Aux from '../../hoc/Au';
+import Au from '../../hoc/Au';
 import AddIcon from '../../static/images/add.svg';
 import PlayIcon from '../../static/images/play-button.svg';
 
 export default function MovieDetails(props) {
   return (
-    <Aux>
+    <Au>
       <div className="modal__container">
         <h1 className="modal__title">
           {props.movie.title || props.movie.name}
@@ -36,6 +36,6 @@ export default function MovieDetails(props) {
           My List
         </button>
       </div>
-    </Aux>
+    </Au>
   );
 }
