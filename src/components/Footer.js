@@ -1,18 +1,15 @@
-import React from "react";
-// import Title from "./Title";
+import React from 'react';
 
-function Footer() {
-    return (
-        <div className="container footer ml-5">
-          <p className="mt-4 white">
-            &copy; 2020{" "}
-            <a className="" href="https://lollykrown.xyz">
-              Ol&#250;wak&#225;y&#242;d&#233;.
-            </a>{" "}
-            All rights reserved.
-          </p>
-        </div>
-    );
-}
+const footer = () => (
+  <footer className="footer">
+    <div className="footer__copyright">
+      &copy; 2018 Made with ❤️ by{' '}
+      <a className="footer__copyright--link" href="http://andresio.com">
+        {' '}
+        Andres Alcocer
+      </a>
+    </div>
+  </footer>
+);
 
-export default Footer;
+export default footer;
