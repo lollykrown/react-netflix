@@ -96,6 +96,7 @@ export default class DisplayMovieRow extends Component {
                     src={movieImageUrl}
                     className="movieShowcase__container--movie-image"
                   />
+                  <h2>{movie.original_title}</h2>
                 </SwiperSlide>
               );
             }
