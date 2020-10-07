@@ -3,59 +3,88 @@ import { Link, withRouter } from "react-router-dom";
 import styled from "styled-components";
 import { MovieContext } from "../MovieContext";
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 function Movie(props) {
   const [isFav, setIsFav] = useState(false)
+
   const movie = props.movie
   const { prefix } = useContext(MovieContext)
+  
+  const notify = (msg) => toast.error(msg, {
+    position: "bottom-center",
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    }); 
 
-  useEffect(() => {
+    useEffect(() => {
     const checkIfFav = (id) => {
       let fav = JSON.parse(localStorage.getItem("movies"));
       if(fav){
-      const moviee = fav.find((e) => e.id === id);
-      moviee && setIsFav(prev => !prev);
+        const moviee = fav.find((e) => e.id === id);
+        if(moviee !== undefined) {
+          if(!moviee.isFav){
+            setIsFav(false)
+          } 
+          setIsFav(true);
+        }
+
       }
     };
 
     checkIfFav(movie.id);
   },[movie]);
 
+  console.time('add to fav')
   const addToFav = (el) => {
     let movieCache = [];
     if (!localStorage.getItem("movies")) {
       console.log("no movie cached yet");
+      el.isFav = true
       movieCache.push(el);
-      alert(`${el.title} added to your favorites`);
+      notify(`${el.title} added to your favorites`)
       localStorage.setItem("movies", JSON.stringify(movieCache));
+      const path = props.history.location.pathname
+      props.history.push(path)
     } else {
       console.log("merge/update cached data");
       let oldCache = JSON.parse(localStorage.getItem("movies"));
+      console.log(oldCache)
+
       const isthere = oldCache.find((e) => e.id === el.id);
       if (!isthere) {
+        el.isFav = true
         oldCache.push(el);
         localStorage.setItem("movies", JSON.stringify(oldCache));
+        const path = props.history.location.pathname
+        props.history.push(path)
         setIsFav(!isFav)
-        alert(`${el.title} added to your favorites`);
+        notify(`${el.title} added to your favorites`)
       } else {
-        alert(`${el.title} is already in your favorites`);
+        notify(`${el.title} is already in your favorites`);
       }
     }
   };
+  console.timeEnd('add to fav')
 
   const deleteFromfav = (el) => {
     const fav = JSON.parse(localStorage.getItem("movies"));
+    el.isFav = false;
     const index = fav.findIndex((e) => e.id === el.id);
     const title = fav[index].title;
     console.log(index);
     fav.splice(index, 1);
-    alert(title, "successfully deleted");
+    notify(`${title} successfully deleted from your favorites`);
     localStorage.removeItem("movies");
     localStorage.setItem("movies", JSON.stringify(fav));
-    setIsFav(!isFav)
-    console.log(props)
-    if (props.cat === "favorites"){
-     props.history.push('/favorites')
-    }
+    setIsFav(false)
+    const path = props.history.location.pathname
+    props.history.push(path)
   };
 
   const { poster_path, release_date, title } = movie;
@@ -92,6 +121,7 @@ function Movie(props) {
             onClick={() => deleteFromfav(movie)}
           ></span>
         )}
+        <ToastContainer />  
       </div>
     </MovieWrapper>
   );

@@ -60,7 +60,7 @@ export default function MovieList(props) {
   }
   }, [props, pageTitle])
 
-  if(!loading) {
+  if(loading) {
     return <Loading />
   }
 

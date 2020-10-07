@@ -38,7 +38,10 @@ export default function MovieDetails(props) {
         }
       }
     };
+    console.time('get movie')
     getMovieById();
+    console.timeEnd('get movie')
+
 
     return () => {
       source.cancel();
@@ -95,8 +98,9 @@ export default function MovieDetails(props) {
         }
       }
     };
+    console.time('get trailers')
     getTrailers();
-
+    console.timeEnd('get trailers')
     return () => {
       source.cancel();
     };
