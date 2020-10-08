@@ -18,7 +18,8 @@ export default function MovieList(props) {
 
   useEffect(() => {
     const source = axios.CancelToken.source() 
-    
+    setLoading(true)
+
     let tit;
     if (props.cat === "popular") {
     tit = "popular";
