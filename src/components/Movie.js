@@ -13,7 +13,7 @@ function Movie(props) {
   const { prefix } = useContext(MovieContext)
   
   const notify = (msg) => toast.error(msg, {
-    position: "bottom-center",
+    position: "top-right",
     autoClose: 5000,
     hideProgressBar: false,
     closeOnClick: true,
