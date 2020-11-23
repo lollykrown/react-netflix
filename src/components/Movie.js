@@ -1,17 +1,17 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, withRouter } from "react-router-dom";
 import styled from "styled-components";
-import { MovieContext } from "../MovieContext";
+import ErrorBoundary from '../ErrorBoundary';
 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-function Movie(props) {
+function MovieComponent(props) {
   const [isFav, setIsFav] = useState(false)
+  const prefix = "https://image.tmdb.org/t/p/w500";  
 
-  const movie = props.movie
-  const { prefix } = useContext(MovieContext)
-  
+  const {movie,showErrorCard} = props
+
   const notify = (msg) => toast.error(msg, {
     position: "top-right",
     autoClose: 5000,
@@ -32,15 +32,14 @@ function Movie(props) {
             setIsFav(false)
           } 
           setIsFav(true);
-        }
-
+        } 
       }
     };
 
     checkIfFav(movie.id);
   },[movie]);
 
-  console.time('add to fav')
+  console.time('add to fav') //check how long it takes for the function to run
   const addToFav = (el) => {
     let movieCache = [];
     if (!localStorage.getItem("movies")) {
@@ -88,6 +87,22 @@ function Movie(props) {
   };
 
   const { poster_path, release_date, title } = movie;
+
+  if (showErrorCard) {
+    return (
+      <div className="rounded overflow-hidden shadow-lg p-6 bg-white">
+        <div className="grid grid-cols-4 mb-6">
+          <div className="font-bold text-lg col-span-3">
+            Error Showing Speaker
+          </div>
+        </div>
+        <div className="mb-6">
+          <img src="./dummy-speaker-image.jpg" alt="Placeholder"/>
+        </div>
+        <div>Contact site owner for resolution.</div>
+      </div>
+    );
+  }
 
   return (
     <MovieWrapper className="card col-md-4 col-lg-2">
@@ -163,5 +178,15 @@ const MovieWrapper = styled.div`
     margin-bottom: -1.25rem;
   }
 `;
+
+const Movie = React.memo((props) => {
+  return (
+    <ErrorBoundary
+      errorUI={<MovieComponent showErrorCard={true}></MovieComponent>}
+    >
+      <MovieComponent {...props} />
+    </ErrorBoundary>
+  );
+});
 
 export default withRouter(Movie)

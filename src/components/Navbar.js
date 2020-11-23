@@ -1,36 +1,19 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useContext } from "react";
 import { Link, withRouter} from "react-router-dom";
 import styled from "styled-components";
 import { MovieContext } from "../MovieContext";
 
-function Navbar(props){
-  const { movies, addFilteredMovies } = useContext(MovieContext)
+function Navbar({ searchQuery, setSearchQuery }){
+  const { records: movies } = useContext(MovieContext);
 
-  const [search, setSearch] = useState('')
   const [suggestions, setSuggestions] = useState([])
-  const [titles, setTitles] = useState([])
-  
-  useEffect(() => {
-    const t = movies.map(e => e.title)
-    setTitles(t)
-  }, [movies])
-
-  useEffect(() => {
-    addFilteredMovies(
-      movies.filter( m => {
-        return m.title.toLowerCase().includes(search.toLowerCase())
-      })
-    )
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [search, movies])
-
 
   const setVal = (e) => {
     const value = e.target.value;
-    setSearch(value)
+    setSearchQuery(value)
     if(value.length > 0){
       const regex = new RegExp(`^${value}`, 'i');
-      const sugg = titles.sort().filter(v => v.match(regex))
+      const sugg = movies.map(e => e.title).sort().filter(v => v.match(regex))
       setSuggestions(sugg)
     } else {
       setSuggestions([])
@@ -76,22 +59,19 @@ function Navbar(props){
             </div>
           </li>
         </ul>
-        {!props.id ?          
             <form className="form-inline ml-auto my-lg-0">
             <input
               onChange={e=> setVal(e)}
               className="form-control"
               type="search"
-              value={search}
+              value={searchQuery}
               placeholder="&#128269; Search Movies"
               aria-label="Search"
             />
             <ul className="mt-3">
-                {suggestions.map((t, i) =><span onClick={() => setSearch(t)} key={i} className="badge badge-danger mr-2">{t}</span>)}
+                {suggestions.map((t, i) =><span onClick={() => setSearchQuery(t)} key={i} className="badge badge-danger mr-2">{t}</span>)}
             </ul>
           </form>
-          : null
-        }
         <ul className="navbar-nav align-items-center ml-auto">
         <li className="nav-item ml-4">
             <a href="mailto:joe_kayu@yahoo.com" className="nav-link">

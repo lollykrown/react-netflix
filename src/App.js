@@ -6,7 +6,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'jquery/dist/jquery.min.js';
 import 'bootstrap/dist/js/bootstrap.min.js';
 import Home from './components/Home';
-import Footer from './components/Footer';
 import Default from './components/Default';
 import MovieList from './components/MovieList';
 import MovieDetails from './components/MovieDetails';
@@ -25,7 +24,6 @@ function App() {
       <Route component={Loading} />                                     
       <Route component={Default} />
     </Switch>
-    <Footer />
   </React.Fragment>
   );
 }

@@ -1,92 +1,104 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Movie from './Movie'
-import axios from 'axios';
 import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
 import Loading from './Loading'
+import { REQUEST_STATUS } from '../reducer';
 
-import { MovieContext } from "../MovieContext";
+import { MovieContext, MovieProvider } from "../MovieContext";
 
-export default function MovieList(props) {
-  const url = "https://api.themoviedb.org/3/movie/";
-  const apiKey = "0180207eb6ef9e35482bc3aa2a2b9672";
-  const lang = "en-US";
+function MovieListComponent(props) {
 
-  const { addMovies, filtered} = useContext(MovieContext)
- 
+  const { records: movies, status, error } = useContext(MovieContext);
+  const [searchQuery, setSearchQuery] = useState('');
   const [pageTitle, setPageTitle] = useState('')
-  const [loading, setLoading] = useState(false)
+
+  const success = status === REQUEST_STATUS.SUCCESS;
+  const isLoading = status === REQUEST_STATUS.LOADING;
+  const hasError = status === REQUEST_STATUS.ERROR;
 
   useEffect(() => {
-    const source = axios.CancelToken.source() 
-    setLoading(true)
-
-    let tit;
-    if (props.cat === "popular") {
-    tit = "popular";
-    setPageTitle("Popular Movies");
-    } else if (props.cat === "top") {
-    tit = "top_rated";
-    setPageTitle("Top Rated Movies");
-    } else if (props.cat === "now") {
-    tit = "now_playing";
-    setPageTitle("Now playing");
-    }
-
     if (props.cat === "favorites") {
-      setPageTitle("Favorite Movies")
-    let cachedFav = JSON.parse(localStorage.getItem("movies"));
-    addMovies(cachedFav)
-    setLoading(false)
+      setPageTitle('Favorites')
+    } else if (props.cat === "popular") {
+      setPageTitle('Popular Movies')
+    } else if (props.cat === "top") {
+      setPageTitle('Top Rated Movies')
+    } else if (props.cat === "now") {
+      setPageTitle('Now playing')
     }
 
-    const getMovies = async (ti) => {    
-      const movieUrl = `${url}${ti}?api_key=${apiKey}&language=${lang}`;
-  
-      try {
-        const response = await axios.get(movieUrl, { cancelToken: source.token });
-        addMovies(response.data.results);
-        setLoading(false)
-      } catch (error) {
-        if (axios.isCancel(error)) {
-          console.log('Request canceled', error.message);
-        } else {
-          throw error
-        }
-      }
-    };
-    
-    getMovies(tit)
-    return () => {
-      source.cancel()
-  }
-  }, [props, pageTitle])
+  }, [props.cat])
 
-  if(loading) {
+  if (isLoading) {
     return <Loading />
   }
 
-    return (
-      <React.Fragment>
-      <Navbar/>
+  return (
+    <React.Fragment>
+      <Navbar searchQuery={searchQuery}
+        setSearchQuery={setSearchQuery} />
 
-      <div className="container-fluid pl-5">
-        {(filtered.length < 1 && props.cat === 'favorites')?
-          <h2 className="white mt-4 ml-2">You have not made any movie your favorite.</h2>:
-        <h2 className="white mt-4">{pageTitle}</h2>}
-
-        <div className="row">
-            {filtered.map(movie => {
-              return (
-                <Movie 
-                  cat={props.cat}
-                  key={movie.id}
-                  movie={movie}
-                />
-              );
-            })}
+      {hasError && (
+        <div className="container mt-4">
+          <h2 className="white mt-4 ml-2">
+            Loading error...
+          <br /><br />
+            <b>ERROR: {error.message}</b>
+          </h2>
         </div>
-      </div>
-      </React.Fragment>
-    );
+      )}
+      { success && (
+        <div className="container px-auto">
+          {(movies === null && props.cat === 'favorites') ?
+            <h2 className="white mt-4 ml-2">You have not added any movie to your favorites list.</h2> :
+            (<><h2 className="white mt-4">{pageTitle}</h2>
+
+              <div className="row">
+                {movies
+                  .filter((m) => {
+                    // return m.title.toLowerCase().includes(search.toLowerCase())
+
+                    return searchQuery.length === 0
+                      ? true
+                      : m.title.toLowerCase().includes(searchQuery.toLowerCase());
+                  })
+                  .map(movie => {
+                    return (
+                      <Movie
+                        key={movie.id}
+                        movie={movie}
+                      />
+                    );
+                  })}
+              </div></>)}
+        </div>
+      )}
+      <Footer />
+
+    </React.Fragment>
+  );
 }
 
+const MoviesList = (props) => {
+
+  let tit;
+  let fav = false;
+  if (props.cat === "favorites") {
+    fav = true;
+  } else if (props.cat === "popular") {
+    tit = "popular";
+  } else if (props.cat === "top") {
+    tit = "top_rated";
+  } else if (props.cat === "now") {
+    tit = "now_playing";
+  }
+
+  return (
+    <MovieProvider title={tit} fav={fav}>
+      <MovieListComponent {...props} cat={props.cat}></MovieListComponent>
+    </MovieProvider>
+  );
+};
+
+export default MoviesList;
