@@ -6,9 +6,16 @@ import Loading from './Loading'
 import { REQUEST_STATUS } from '../reducer';
 
 import { MovieContext, MovieProvider } from "../MovieContext";
+import { ThemeContext, THEMELIST } from '../ThemeContext';
 
 function MovieListComponent(props) {
+  const { theme } = useContext(ThemeContext)
 
+  const classNameValue =
+    theme === THEMELIST.DARK
+      ? 'bg-black'
+      : 'bg-white';
+      
   const { records: movies, status, error } = useContext(MovieContext);
   const [searchQuery, setSearchQuery] = useState('');
   const [pageTitle, setPageTitle] = useState('')
@@ -35,7 +42,7 @@ function MovieListComponent(props) {
   }
 
   return (
-    <React.Fragment>
+    <div className={classNameValue}>
       <Navbar searchQuery={searchQuery}
         setSearchQuery={setSearchQuery} />
 
@@ -49,7 +56,7 @@ function MovieListComponent(props) {
         </div>
       )}
       { success && (
-        <div className="container px-auto">
+        <div className="container">
           {(props.cat === 'favorites' && movies.length <1) ?
             <h2 className="white mt-4 ml-2">You have not added any movie to your favorites list.</h2> :
             (<><h2 className="white mt-4">{pageTitle}</h2>
@@ -76,7 +83,7 @@ function MovieListComponent(props) {
       )}
       <Footer />
 
-    </React.Fragment>
+    </div>
   );
 }
 

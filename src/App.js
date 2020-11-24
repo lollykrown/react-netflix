@@ -13,18 +13,18 @@ import Loading from './components/Loading';
 
 function App() {
   return (
-    <React.Fragment>
-    <Switch>
-      <Route exact path="/" component={Home} />
-      <Route exact path="/popular" component={() => <MovieList cat={"popular"} />} /> 
-      <Route exact path="/top rated" component={() => <MovieList cat={"top"} />} />      
-      <Route exact path="/now playing" component={() => <MovieList cat={"now"} />} />
-      <Route exact path="/favorites" component={() => <MovieList cat={"favorites"} />} />  
-      <Route exact path="/movie/:id" component={MovieDetails} />   
-      <Route component={Loading} />                                     
-      <Route component={Default} />
-    </Switch>
-  </React.Fragment>
+    <div>
+      <Switch>
+        <Route exact path="/" component={Home} />
+        <Route exact path="/popular" component={() => <MovieList cat={"popular"} />} />
+        <Route exact path="/top rated" component={() => <MovieList cat={"top"} />} />
+        <Route exact path="/now playing" component={() => <MovieList cat={"now"} />} />
+        <Route exact path="/favorites" component={() => <MovieList cat={"favorites"} />} />
+        <Route exact path="/movie/:id" component={MovieDetails} />
+        <Route component={Loading} />
+        <Route component={Default} />
+      </Switch>
+    </div>
   );
 }
 

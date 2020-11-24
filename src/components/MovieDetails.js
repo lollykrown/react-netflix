@@ -80,19 +80,19 @@ function MovieDetails(props) {
                   <span className="badge badge-info mr-2">Adventure</span>
                   <span className="badge badge-danger mr-2">Drama</span>
                   <span className="badge badge-success">Thriller</span>
-                  <p className="card-text mt-3">
+                  <div className="card-text mt-3">
                     <small className="mr-3">{date}</small>
-                    <span className="badge btn stars-no">
+                    <span className="badge btn stars-no mt-4 pb-1">
                       {ratings.toString()}
                     </span>
                     <Star rating={ratings} />
-                  </p>
+                  </div>
                 </div>
                 {success && (
                   <div className="col-lg-5 ml-3">
                     <p className="card-title">Cast</p>
                     <div className="cast row">
-                      {cast.map((c) => {
+                      {cast.slice(0,16).map((c) => {
                         return c.profile_path &&
                           (<div key={c.id} className="">
                             <div className="cast-span col-lg-2" title={c.name}>

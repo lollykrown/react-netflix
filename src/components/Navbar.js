@@ -21,7 +21,7 @@ function Navbar({ searchQuery, setSearchQuery }){
   }
 
     return (
-      <NavWrapper className="navbar navbar-expand-sm bg-default navbar-dark px-sm-5">
+      <NavWrapper className="navbar navbar-expand-md bg-default navbar-dark px-sm-5">
       <Link className="navbar-brand" to="/">Mini-<span className="bran">Netflix</span></Link>
       <button
         className="navbar-toggler"
@@ -73,7 +73,7 @@ function Navbar({ searchQuery, setSearchQuery }){
             </ul>
           </form>
         <ul className="navbar-nav align-items-center ml-auto">
-        <li className="nav-item ml-4">
+        <li className="nav-item ml-4 d-none d-lg-block">
             <a href="mailto:joe_kayu@yahoo.com" className="nav-link">
               Contact us
             </a>

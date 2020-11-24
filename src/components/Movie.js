@@ -105,7 +105,7 @@ function MovieComponent(props) {
   }
 
   return (
-    <MovieWrapper className="card col-md-4 col-lg-2">
+    <MovieWrapper className="card col-md-4  col-lg-2">
       <Link to={`movie/${movie.id}`}>
         <div className="">
           <img
@@ -125,7 +125,7 @@ function MovieComponent(props) {
 
         {!isFav ? (
           <span
-            className="fa fa-heart"
+            className="fa fa-heart ml-auto"
             title="add to favorites"
             onClick={() => addToFav(movie)}
           ></span>

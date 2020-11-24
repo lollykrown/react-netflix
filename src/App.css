@@ -6,7 +6,12 @@
 }
 body {
   font-family: Roboto, 'Open Sans', sans-serif;
-  background-color: var(--bg) !important;
+}
+.bg-black{
+  background-color: var(--bg);
+}
+.bg-white{
+  background-color: var(--mainWhite);
 }
 .card {
   box-shadow: 6px 6px 8px #777;
@@ -39,7 +44,7 @@ body {
 }
 
 .bg {
-  background-color: transparent;
+  background-color: transparent !important;
   position: absolute;
   width: 94%;
   left: 3rem;
