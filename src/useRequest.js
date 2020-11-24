@@ -53,7 +53,7 @@ const useRequest = (title, fav) => {
       console.log('unmount and cancel running axios request');
       signal.current.cancel();
     };
-  }, [title]);
+  }, [title, fav]);
 
   const propsLocal = {
     records,

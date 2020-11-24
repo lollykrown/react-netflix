@@ -50,7 +50,7 @@ function MovieListComponent(props) {
       )}
       { success && (
         <div className="container px-auto">
-          {(movies === null && props.cat === 'favorites') ?
+          {(props.cat === 'favorites' && movies.length <1) ?
             <h2 className="white mt-4 ml-2">You have not added any movie to your favorites list.</h2> :
             (<><h2 className="white mt-4">{pageTitle}</h2>
 

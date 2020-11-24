@@ -1,9 +1,9 @@
 import React from "react";
-// import Title from "./Title";
+import styled from "styled-components";
 
 function Footer() {
     return (
-        <div className="container footer ml-5">
+        <FooterWrapper className="container footer ml-5">
           <p className="mt-4 white">
             &copy; 2020{" "}
             <a className="" href="https://lollykrown.xyz">
@@ -11,8 +11,11 @@ function Footer() {
             </a>{" "}
             All rights reserved.
           </p>
-        </div>
+        </FooterWrapper>
     );
 }
+
+const FooterWrapper = styled.div`
+`;
 
 export default Footer;

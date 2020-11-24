@@ -2,18 +2,13 @@ import React from "react";
 import styled from "styled-components";
 import moment from "moment";
 import Star from "./Star";
-import ErrorBoundary from '../ErrorBoundary';
-import Footer from '../components/Footer';
-import dummyImg from '../dummy-image'
 
 import Loading from './Loading'
 import { useRequestMovie } from "../useRequest";
 import { REQUEST_STATUS } from '../reducer';
 
-function MovieDetailsComponent(props) {
+function MovieDetails(props) {
   const prefix = "https://image.tmdb.org/t/p/w500";
-
-  const showErrorCard = props.showErrorCard
 
   const movieId = props.match.params.id
 
@@ -29,7 +24,7 @@ function MovieDetailsComponent(props) {
     backdrop_path,
     // genre_ids,
     overview,
-    poster_pat,
+    poster_path,
     release_date,
     title,
     vote_average,
@@ -44,7 +39,6 @@ function MovieDetailsComponent(props) {
 
   return (
     <React.Fragment>
-      {/* <Navbar id={props.match.params.id}/> */}
       {hasError && (
         <div className="container mt-4">
           <h2 className="white mt-4 ml-2">
@@ -71,17 +65,11 @@ function MovieDetailsComponent(props) {
             <div className="row card ">
               <div className="row no-gutters">
                 <div className="col-sm-5 col-lg-2 ">
-                  {!poster_pat ?
-                    (<img
-                      className="img-fluid img-bd"
-                      src={dummyImg}
-                      alt="poster"
-                    />) :
-                    (<img
-                      src={`${prefix}${poster_pat}`}
+                    <img
+                      src={`${prefix}${poster_path}`}
                       className="card-img img-fluid"
                       alt="poster"
-                    />)}
+                    />
                 </div>
                 <div className="col-sm-6 col-lg-4 card-body pt-0 ml-3">
                   <h4 className="card-title ">{title}</h4>
@@ -147,8 +135,6 @@ function MovieDetailsComponent(props) {
           </div>
         </div>
       </MovieWrapper>
-      <Footer />
-
     </React.Fragment>
   );
 }
@@ -165,14 +151,5 @@ const MovieWrapper = styled.div`
   }
 `;
 
-const MovieDetails = React.memo((props) => {
-  return (
-    <ErrorBoundary
-      errorUI={<MovieDetailsComponent showErrorCard={true}></MovieDetailsComponent>}
-    >
-      <MovieDetailsComponent {...props} />
-    </ErrorBoundary>
-  );
-});
 
 export default MovieDetails;
