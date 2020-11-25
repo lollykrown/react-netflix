@@ -16,7 +16,7 @@ export default class DisplayMovieRow extends Component {
     window.addEventListener("resize", this.handleResize);
   }
 
-  componentWillUnMount() {
+  componentWillUnmount() {
     window.addEventListener("resize", this.handleResize);
   }
 
