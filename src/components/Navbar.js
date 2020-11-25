@@ -3,8 +3,10 @@ import { Link, withRouter} from "react-router-dom";
 import styled from "styled-components";
 import { MovieContext } from "../MovieContext";
 
-function Navbar({ searchQuery, setSearchQuery }){
+function Navbar(props){
   const { records: movies } = useContext(MovieContext);
+
+  const { searchQuery, setSearchQuery } = props
 
   const [suggestions, setSuggestions] = useState([])
 

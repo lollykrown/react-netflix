@@ -39,7 +39,7 @@ function MovieComponent(props) {
     checkIfFav(movie.id);
   },[movie]);
 
-  console.time('add to fav') //check how long it takes for the function to run
+  // console.time('add to fav') //check how long it takes for the function to run
   const addToFav = (el) => {
     let movieCache = [];
     if (!localStorage.getItem("movies")) {
@@ -69,7 +69,7 @@ function MovieComponent(props) {
       }
     }
   };
-  console.timeEnd('add to fav')
+  // console.timeEnd('add to fav')
 
   const deleteFromfav = (el) => {
     const fav = JSON.parse(localStorage.getItem("movies"));
